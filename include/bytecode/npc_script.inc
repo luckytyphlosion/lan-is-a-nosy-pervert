@@ -33,7 +33,7 @@
 // destination3 - script to jump to
 	.macro npc_jump_if_flag_set, hword1, destination3
 	.byte npc_jump_if_flag_set_cmd
-	.hword hword1
+	.halfword hword1
 	.word destination3
 	.endmacro
 
@@ -44,7 +44,7 @@
 // destination3 - script to jump to
 	.macro npc_jump_if_flag_clear, hword1, destination3
 	.byte npc_jump_if_flag_clear_cmd
-	.hword hword1
+	.halfword hword1
 	.word destination3
 	.endmacro
 
@@ -54,7 +54,7 @@
 // hword1 - event flag to set
 	.macro npc_set_event_flag, hword1
 	.byte npc_set_event_flag_cmd
-	.hword hword1
+	.halfword hword1
 	.endmacro
 
 	enum npc_clear_event_flag_cmd, 0x07 // 0x07
@@ -63,7 +63,7 @@
 // hword1 - event flag to clear
 	.macro npc_clear_event_flag, hword1
 	.byte npc_clear_event_flag_cmd
-	.hword hword1
+	.halfword hword1
 	.endmacro
 
 	enum npc_set_active_and_visible_cmd, 0x08 // 0x08
@@ -201,9 +201,9 @@
 // hword5 - z coordinate
 	.macro npc_set_coords, hword1, hword3, hword5
 	.byte npc_set_coords_cmd
-	.hword hword1
-	.hword hword3
-	.hword hword5
+	.halfword hword1
+	.halfword hword3
+	.halfword hword5
 	.endmacro
 
 	enum npc_move_in_direction_cmd, 0x15 // 0x15
@@ -383,7 +383,7 @@
 // hword1 - sound effect to play
 	.macro npc_play_sound, hword1
 	.byte npc_play_sound_cmd
-	.hword hword1
+	.halfword hword1
 	.endmacro
 
 	enum npc_init_mystery_data_cmd, 0x29 // 0x29
@@ -398,7 +398,7 @@
 // hword1 - mystery data ID
 	.macro npc_init_mystery_data, hword1
 	.byte npc_init_mystery_data_cmd
-	.hword hword1
+	.halfword hword1
 	.endmacro
 
 	enum npc_wait_anim_frame_cmd, 0x2a // 0x2a
@@ -417,7 +417,7 @@
 // hword1 - new color shader as 15bit RGB
 	.macro npc_set_color_shader, hword1
 	.byte npc_set_color_shader_cmd
-	.hword hword1
+	.halfword hword1
 	.endmacro
 
 	enum_skip 1
@@ -671,7 +671,7 @@
 // hword1 - mystery data id
 	.macro npc_wait_mystery_data_taken, hword1
 	.byte npc_wait_mystery_data_taken_cmd
-	.hword hword1
+	.halfword hword1
 	.endmacro
 
 	enum npc_set_obj_window_mode_cmd, 0x46 // 0x46
@@ -689,7 +689,7 @@
 // hword1 - music to play
 	.macro npc_play_music, hword1
 	.byte npc_play_music_cmd
-	.hword hword1
+	.halfword hword1
 	.endmacro
 
 	enum npc_set_sprite_0x3_bit5_cmd, 0x48 // 0x48
@@ -717,7 +717,7 @@
 	.macro npc_do_camera_shake, byte1, hword2
 	.byte npc_do_camera_shake_cmd
 	.byte byte1
-	.hword hword2
+	.halfword hword2
 	.endmacro
 
 	enum npc_jump_if_anim_not_equal_cmd, 0x4b // 0x4b
@@ -843,7 +843,7 @@
 // hword1 - event flag of prog
 	.macro npc_init_groundman_minigame_prog, hword1
 	.byte npc_init_groundman_minigame_prog_cmd
-	.hword hword1
+	.halfword hword1
 	.endmacro
 
 	enum npc_jack_out_cmd, 0x52 // 0x52

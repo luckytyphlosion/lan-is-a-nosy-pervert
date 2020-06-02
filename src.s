@@ -10,4 +10,6 @@
 	.byte GROUP_ACDC_TOWN
 	.byte MAP_ACDC_TOWN
 
+	.include "cutscene.s"
+
 	.close

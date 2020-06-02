@@ -41,7 +41,7 @@
 	.macro ms_jump_if_flag_set, byte1, hword2, destination4
 	.byte ms_jump_if_flag_set_cmd
 	.byte byte1
-	.hword hword2
+	.halfword hword2
 	.word destination4
 	.endmacro
 
@@ -55,7 +55,7 @@
 	.macro ms_jump_if_flag_range_set, byte1, hword2, destination4
 	.byte ms_jump_if_flag_range_set_cmd
 	.byte byte1
-	.hword hword2
+	.halfword hword2
 	.word destination4
 	.endmacro
 
@@ -69,7 +69,7 @@
 	.macro ms_jump_if_flag_clear, byte1, hword2, destination4
 	.byte ms_jump_if_flag_clear_cmd
 	.byte byte1
-	.hword hword2
+	.halfword hword2
 	.word destination4
 	.endmacro
 
@@ -83,7 +83,7 @@
 	.macro ms_jump_if_flag_range_clear, byte1, hword2, destination4
 	.byte ms_jump_if_flag_range_clear_cmd
 	.byte byte1
-	.hword hword2
+	.halfword hword2
 	.word destination4
 	.endmacro
 
@@ -116,7 +116,7 @@
 	.byte ms_jump_if_hword_equals_subcmd
 	.word word2
 	.word destination6
-	.hword hword10
+	.halfword hword10
 	.endmacro
 
 	subenum ms_jump_if_word_equals_subcmd, 0x2 // 0x2
@@ -161,7 +161,7 @@
 // destination6 - script to jump to
 	.macro ms_jump_if_chip_count_in_range, hword1, byte3, byte4, byte5, destination6
 	.byte ms_jump_if_chip_count_in_range_cmd
-	.hword hword1
+	.halfword hword1
 	.byte byte3
 	.byte byte4, byte5
 	.word destination6
@@ -276,7 +276,7 @@
 // destination2 - script to jump to
 	.macro ms_jump_if_player_z_equals, signedhword1, destination2
 	.byte ms_jump_if_player_z_equals_cmd
-	.hword signedhword1
+	.halfword signedhword1
 	.word destination2
 	.endmacro
 
@@ -287,7 +287,7 @@
 // destination2 - script to jump to
 	.macro ms_jump_if_player_z_not_equal, signedhword1, destination2
 	.byte ms_jump_if_player_z_not_equal_cmd
-	.hword signedhword1
+	.halfword signedhword1
 	.word destination2
 	.endmacro
 
@@ -298,7 +298,7 @@
 // destination2 - script to jump to
 	.macro ms_jump_if_game_state_44_equals, hword1, destination2
 	.byte ms_jump_if_game_state_44_equals_cmd
-	.hword hword1
+	.halfword hword1
 	.word destination2
 	.endmacro
 
@@ -309,7 +309,7 @@
 // destination2 - script to jump to
 	.macro ms_jump_if_game_state_44_not_equal, hword1, destination2
 	.byte ms_jump_if_game_state_44_not_equal_cmd
-	.hword hword1
+	.halfword hword1
 	.word destination2
 	.endmacro
 
@@ -442,7 +442,7 @@
 	.macro ms_set_event_flag, byte1, hword2
 	.byte ms_set_event_flag_cmd
 	.byte byte1
-	.hword hword2
+	.halfword hword2
 	.endmacro
 
 // shared command
@@ -454,7 +454,7 @@
 	.macro ms_clear_event_flag, byte1, hword2
 	.byte ms_clear_event_flag_cmd
 	.byte byte1
-	.hword hword2
+	.halfword hword2
 	.endmacro
 
 // shared command
@@ -467,7 +467,7 @@
 	.macro ms_set_event_flag_range, byte1, hword2
 	.byte ms_set_event_flag_range_cmd
 	.byte byte1
-	.hword hword2
+	.halfword hword2
 	.endmacro
 
 // shared command
@@ -480,7 +480,7 @@
 	.macro ms_clear_event_flag_range, byte1, hword2
 	.byte ms_clear_event_flag_range_cmd
 	.byte byte1
-	.hword hword2
+	.halfword hword2
 	.endmacro
 
 // shared command
@@ -548,7 +548,7 @@
 	.macro ms_write_hword, word1, hword5
 	.byte ms_write_hword_cmd
 	.word word1
-	.hword hword5
+	.halfword hword5
 	.endmacro
 
 // shared command
@@ -646,7 +646,7 @@
 // hword1 - sound to play
 	.macro ms_play_sound, hword1
 	.byte ms_play_sound_cmd
-	.hword hword1
+	.halfword hword1
 	.endmacro
 
 // shared command
@@ -656,7 +656,7 @@
 // hword1 - music to play. if this is negative, then play the current map music
 	.macro ms_play_music, hword1
 	.byte ms_play_music_cmd
-	.hword hword1
+	.halfword hword1
 	.endmacro
 
 // shared command
@@ -665,7 +665,7 @@
 // call sound_80006A2 with r0=hword1, r1=byte3, r2=byte4
 	.macro ms_sound_cmd_80380ea, hword1, byte3, byte4
 	.byte ms_sound_cmd_80380ea_cmd
-	.hword hword1
+	.halfword hword1
 	.byte byte3
 	.byte byte4
 	.endmacro
@@ -851,7 +851,7 @@
 // byte3 - number of bbs messages to add
 	.macro ms_add_bbs_message_range, hword1, byte3
 	.byte ms_add_bbs_message_range_cmd
-	.hword hword1
+	.halfword hword1
 	.byte byte3
 	.endmacro
 
@@ -864,7 +864,7 @@
 // byte3 - number of mails to add
 	.macro ms_add_mail_range, hword1, byte3
 	.byte ms_add_mail_range_cmd
-	.hword hword1
+	.halfword hword1
 	.byte byte3
 	.endmacro
 
@@ -887,7 +887,7 @@
 // byte3 - number of bbs requests to add
 	.macro ms_add_request_range, hword1, byte3
 	.byte ms_add_request_range_cmd
-	.hword hword1
+	.halfword hword1
 	.byte byte3
 	.endmacro
 

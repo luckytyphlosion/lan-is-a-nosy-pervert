@@ -9,9 +9,9 @@
 // hword5 - z coord
 	.macro ccs_set_camera_pos, hword1, hword3, hword5
 	.byte ccs_set_camera_pos_cmd
-	.hword hword1
-	.hword hword3
-	.hword hword5
+	.halfword hword1
+	.halfword hword3
+	.halfword hword5
 	.endmacro
 
 	enum ccs_simple_scroll_cmd, 0x04 // 0x04
@@ -23,10 +23,10 @@
 // hword7 - z offset
 	.macro ccs_simple_scroll, hword1, hword3, hword5, hword7
 	.byte ccs_simple_scroll_cmd
-	.hword hword1
-	.hword hword3
-	.hword hword5
-	.hword hword7
+	.halfword hword1
+	.halfword hword3
+	.halfword hword5
+	.halfword hword7
 	.endmacro
 
 	enum ccs_end_cmd, 0x08 // 0x08
@@ -42,7 +42,7 @@
 // hword1 - number of frames to wait
 	.macro ccs_wait, hword1
 	.byte ccs_wait_cmd
-	.hword hword1
+	.halfword hword1
 	.endmacro
 
 	enum ccs_init_shake_effect_cmd, 0x10 // 0x10
@@ -74,10 +74,10 @@
 // hword7 - scroll time
 	.macro ccs_smooth_auto_scroll_to_pos, hword1, hword3, hword5, hword7
 	.byte ccs_smooth_auto_scroll_to_pos_cmd
-	.hword hword1
-	.hword hword3
-	.hword hword5
-	.hword hword7
+	.halfword hword1
+	.halfword hword3
+	.halfword hword5
+	.halfword hword7
 	.endmacro
 
 	enum ccs_smooth_auto_scroll_to_pos_relative_to_ow_player_cmd, 0x1c // 0x1c
@@ -89,10 +89,10 @@
 // hword7 - scroll time
 	.macro ccs_smooth_auto_scroll_to_pos_relative_to_ow_player, hword1, hword3, hword5, hword7
 	.byte ccs_smooth_auto_scroll_to_pos_relative_to_ow_player_cmd
-	.hword hword1
-	.hword hword3
-	.hword hword5
-	.hword hword7
+	.halfword hword1
+	.halfword hword3
+	.halfword hword5
+	.halfword hword7
 	.endmacro
 
 	enum ccs_smooth_auto_scroll_to_soul_weapons_cursor_cmd, 0x20 // 0x20
@@ -103,7 +103,7 @@
 	.macro ccs_smooth_auto_scroll_to_soul_weapons_cursor, hword7
 	.byte ccs_smooth_auto_scroll_to_soul_weapons_cursor_cmd
 	.byte 0, 0, 0, 0, 0, 0
-	.hword hword7
+	.halfword hword7
 	.endmacro
 
 	enum ccs_smooth_auto_scroll_cmd_80372ec_cmd, 0x24 // 0x24
@@ -114,7 +114,7 @@
 	.macro ccs_smooth_auto_scroll_cmd_80372ec, hword7
 	.byte ccs_smooth_auto_scroll_cmd_80372ec_cmd
 	.byte 0, 0, 0, 0, 0, 0
-	.hword hword7
+	.halfword hword7
 	.endmacro
 
 	enum ccs_run_text_script_cmd, 0x28 // 0x28
@@ -173,7 +173,7 @@
 // hword1 - event flag to set
 	.macro ccs_set_event_flag, hword1
 	.byte ccs_set_event_flag_cmd
-	.hword hword1
+	.halfword hword1
 	.endmacro
 
 	enum ccs_clear_event_flag_cmd, 0x44 // 0x44
@@ -182,7 +182,7 @@
 // hword1 - event flag to clear
 	.macro ccs_clear_event_flag, hword1
 	.byte ccs_clear_event_flag_cmd
-	.hword hword1
+	.halfword hword1
 	.endmacro
 
 	enum ccs_sound_cmd_80373fc_cmd, 0x48 // 0x48
@@ -200,7 +200,7 @@
 // hword1 - music to play
 	.macro ccs_play_music, hword1
 	.byte ccs_play_music_cmd
-	.hword hword1
+	.halfword hword1
 	.endmacro
 
 	enum ccs_write_camera_field_03_14_cmd, 0x50 // 0x50

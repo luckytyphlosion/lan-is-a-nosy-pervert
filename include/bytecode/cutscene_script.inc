@@ -35,7 +35,7 @@
 	.macro cs_long_pause, byte1, hword2
 	.byte cs_long_pause_cmd
 	.byte byte1
-	.hword hword2
+	.halfword hword2
 	.endmacro
 
 	enum cs_wait_chatbox_cmd, 0x04 // 0x04
@@ -116,7 +116,7 @@
 // hword1 - flag to test
 	.macro cs_wait_if_flag_clear, hword1
 	.byte cs_wait_if_flag_clear_cmd
-	.hword hword1
+	.halfword hword1
 	.endmacro
 
 	enum cs_wait_if_flag_set_cmd, 0x0e // 0x0e
@@ -221,7 +221,7 @@
 	.macro cs_jump_if_flag_set, byte1, hword2, destination4
 	.byte cs_jump_if_flag_set_cmd
 	.byte byte1
-	.hword hword2
+	.halfword hword2
 	.word destination4
 	.endmacro
 
@@ -235,7 +235,7 @@
 	.macro cs_jump_if_flag_range_set, byte1, hword2, destination4
 	.byte cs_jump_if_flag_range_set_cmd
 	.byte byte1
-	.hword hword2
+	.halfword hword2
 	.word destination4
 	.endmacro
 
@@ -249,7 +249,7 @@
 	.macro cs_jump_if_flag_clear, byte1, hword2, destination4
 	.byte cs_jump_if_flag_clear_cmd
 	.byte byte1
-	.hword hword2
+	.halfword hword2
 	.word destination4
 	.endmacro
 
@@ -263,7 +263,7 @@
 	.macro cs_jump_if_flag_range_clear
 	.byte cs_jump_if_flag_range_clear_cmd
 	.byte byte1
-	.hword hword2
+	.halfword hword2
 	.word destination4
 	.endmacro
 
@@ -296,7 +296,7 @@
 	.byte cs_jump_if_hword_equals_subcmd
 	.word word2
 	.word destination6
-	.hword hword10
+	.halfword hword10
 	.endmacro
 
 	subenum cs_jump_if_word_equals_subcmd, 0x2 // 0x2
@@ -354,7 +354,7 @@
 // destination6 - script to jump to
 	.macro cs_jump_if_chip_count_in_range, hword1, byte3, byte4, byte5, destination6
 	.byte cs_jump_if_chip_count_in_range_cmd
-	.hword hword1
+	.halfword hword1
 	.byte byte3
 	.byte byte4, byte5
 	.word destination6
@@ -495,7 +495,7 @@
 	.macro cs_set_event_flag, byte1, hword2
 	.byte cs_set_event_flag_cmd
 	.byte byte1
-	.hword hword2
+	.halfword hword2
 	.endmacro
 
 // shared command
@@ -507,7 +507,7 @@
 	.macro cs_clear_event_flag, byte1, hword2
 	.byte cs_clear_event_flag_cmd
 	.byte byte1
-	.hword hword2
+	.halfword hword2
 	.endmacro
 
 // shared command
@@ -520,7 +520,7 @@
 	.macro cs_set_event_flag_range, byte1, hword2
 	.byte cs_set_event_flag_range_cmd
 	.byte byte1
-	.hword hword2
+	.halfword hword2
 	.endmacro
 
 // shared command
@@ -533,7 +533,7 @@
 	.macro cs_clear_event_flag_range, byte1, hword2
 	.byte cs_clear_event_flag_range_cmd
 	.byte byte1
-	.hword hword2
+	.halfword hword2
 	.endmacro
 
 // shared command
@@ -579,7 +579,7 @@
 	.macro cs_write_hword, word1, hword5
 	.byte cs_write_hword_cmd
 	.word word1
-	.hword hword5
+	.halfword hword5
 	.endmacro
 
 // shared command
@@ -944,9 +944,9 @@
 	.byte byte1
 	.byte byte2
 	.byte byte3
-	.hword signedhword4
-	.hword signedhword6
-	.hword signedhword8
+	.halfword signedhword4
+	.halfword signedhword6
+	.halfword signedhword8
 	.endmacro
 
 	enum cs_move_player_in_facing_direction_cmd, 0x42 // 0x42
@@ -961,7 +961,7 @@
 	.byte cs_move_player_in_facing_direction_cmd
 	.byte byte1
 	.byte byte2
-	.hword signedhword3
+	.halfword signedhword3
 	.endmacro
 
 	enum cs_ow_player_cmd_8037cc4_cmd, 0x43 // 0x43
@@ -1035,7 +1035,7 @@
 	.macro cs_set_custom_ow_player_navi_color_shader, hword2
 	.byte cs_set_ow_player_navi_color_shader_cmd
 	.byte cs_set_custom_ow_player_navi_color_shader_cmd
-	.hword hword2
+	.halfword hword2
 	.endmacro
 
 	subenum cs_set_default_ow_player_navi_color_shader_subcmd, 0x1 // 0x1
@@ -1102,9 +1102,9 @@
 	.byte cs_spawn_free_ow_map_object_specials_cmd
 	nybble cs_spawn_ow_map_object_subcmd, nybble1
 	.byte byte2
-	.hword hword3
-	.hword hword5
-	.hword hword7
+	.halfword hword3
+	.halfword hword5
+	.halfword hword7
 	.word word9
 	.endmacro
 
@@ -1121,9 +1121,9 @@
 	.byte cs_spawn_free_ow_map_object_specials_cmd
 	nybble cs_spawn_ow_map_object_rel_to_ow_player_subcmd, nybble1
 	.byte byte2
-	.hword hword3
-	.hword hword5
-	.hword hword7
+	.halfword hword3
+	.halfword hword5
+	.halfword hword7
 	.word word9
 	.endmacro
 
@@ -1142,9 +1142,9 @@
 	nybble cs_spawn_ow_map_object_rel_to_ow_npc_subcmd, nybble1
 	.byte byte2
 	.byte byte3
-	.hword hword4
-	.hword hword6
-	.hword hword8
+	.halfword hword4
+	.halfword hword6
+	.halfword hword8
 	.word word10
 	.endmacro
 
@@ -1280,7 +1280,7 @@
 // hword1 - sound to play
 	.macro cs_play_sound, hword1
 	.byte cs_play_sound_cmd
-	.hword hword1
+	.halfword hword1
 	.endmacro
 
 // shared command
@@ -1290,7 +1290,7 @@
 // hword1 - music to play. if this is negative, then play the current map music
 	.macro cs_play_music, hword1
 	.byte cs_play_music_cmd
-	.hword hword1
+	.halfword hword1
 	.endmacro
 
 // shared command
@@ -1299,7 +1299,7 @@
 // call sound_80006A2 with r0=hword1, r1=byte3, r2=byte4
 	.macro cs_sound_cmd_80380ea, hword1, byte3, byte4
 	.byte cs_sound_cmd_80380ea_cmd
-	.hword hword1
+	.halfword hword1
 	.byte byte3
 	.byte byte4
 	.endmacro
@@ -1389,7 +1389,7 @@
 // hword1 - battle index
 	.macro cs_start_fixed_battle, hword1
 	.byte cs_start_fixed_battle_cmd
-	.hword hword1
+	.halfword hword1
 	.endmacro
 
 	enum cs_start_random_battle_cmd, 0x56 // 0x56
@@ -1517,7 +1517,7 @@
 // byte3 - number of bbs messages to add
 	.macro cs_add_bbs_message_range, hword1, byte3
 	.byte cs_add_bbs_message_range_cmd
-	.hword hword1
+	.halfword hword1
 	.byte byte3
 	.endmacro
 
@@ -1526,7 +1526,7 @@
 // call encryption_8006e70 with r0=hword1
 	.macro cs_encryption_cmd_80382de, hword1
 	.byte cs_encryption_cmd_80382de_cmd
-	.hword hword1
+	.halfword hword1
 	.endmacro
 
 	enum cs_navi_cmd_80340f6_cmd, 0x69 // 0x69
@@ -1554,7 +1554,7 @@
 // byte3 - number of mails to add
 	.macro cs_add_mail_range, hword1, byte3
 	.byte cs_add_mail_range_cmd
-	.hword hword1
+	.halfword hword1
 	.byte byte3
 	.endmacro
 
@@ -1580,7 +1580,7 @@
 	.macro cs_give_zenny, hword2
 	.byte cs_give_or_take_zenny_cmd
 	.byte cs_give_zenny_subcmd
-	.hword hword2
+	.halfword hword2
 	.endmacro
 
 	subenum cs_take_zenny_subcmd, 0x1 // 0x1
@@ -1590,7 +1590,7 @@
 	.macro cs_take_zenny, hword2
 	.byte cs_give_or_take_zenny_cmd
 	.byte cs_take_zenny_subcmd
-	.hword hword2
+	.halfword hword2
 	.endmacro
 
 	enum cs_give_or_take_bugfrags_cmd, 0x70 // 0x70
@@ -1603,7 +1603,7 @@
 	.macro cs_give_bugfrags, hword2
 	.byte cs_give_or_take_bugfrags_cmd
 	.byte cs_give_bugfrags_subcmd
-	.hword hword2
+	.halfword hword2
 	.endmacro
 
 	subenum cs_take_bugfrags_subcmd, 0x1 // 0x1
@@ -1613,7 +1613,7 @@
 	.macro cs_take_bugfrags, hword2
 	.byte cs_give_or_take_bugfrags_cmd
 	.byte cs_take_bugfrags_subcmd
-	.hword hword2
+	.halfword hword2
 	.endmacro
 
 	enum_skip 2 // 0x71, 0x72
@@ -1630,7 +1630,7 @@
 	.macro cs_give_chips, hword2, byte4, byte5
 	.byte cs_give_or_take_chips_cmd
 	.byte cs_give_chips_subcmd
-	.hword hword2
+	.halfword hword2
 	.byte byte4
 	.byte byte5
 	.endmacro
@@ -1644,7 +1644,7 @@
 	.macro cs_take_chips, hword2, byte4, byte5
 	.byte cs_give_or_take_chips_cmd
 	.byte cs_take_chips_subcmd
-	.hword hword2
+	.halfword hword2
 	.byte byte4
 	.byte byte5
 	.endmacro
@@ -1661,7 +1661,7 @@
 	.macro cs_give_navicust_programs, hword2, byte4, byte5
 	.byte cs_give_or_take_navicust_programs_cmd
 	.byte cs_give_navicust_programs_subcmd
-	.hword hword2
+	.halfword hword2
 	.byte byte4
 	.byte byte5
 	.endmacro
@@ -1675,7 +1675,7 @@
 	.macro cs_take_navicust_programs, hword2, byte4, byte5
 	.byte cs_give_or_take_navicust_programs_cmd
 	.byte cs_take_navicust_programs_subcmd
-	.hword hword2
+	.halfword hword2
 	.byte byte4
 	.byte byte5
 	.endmacro
@@ -1745,7 +1745,7 @@
 // byte3 - number of bbs requests to add
 	.macro cs_add_request_range, hword1, byte3
 	.byte cs_add_request_range_cmd
-	.hword hword1
+	.halfword hword1
 	.byte byte3
 	.endmacro
 
