@@ -5,6 +5,6 @@
 	.include "include/bytecode/cutscene_camera_script.inc"
 	.include "include/bytecode/npc_script.inc"
 
-	.macro map_id map
+	.macro map_id, map
 	.byte GROUP_map, MAP_map
-	.endm
+	.endmacro

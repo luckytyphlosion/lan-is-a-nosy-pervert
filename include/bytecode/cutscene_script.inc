@@ -1,5 +1,5 @@
 	
-	enum_start
+	enum_start 0, 1
 
 	enum cs_end_for_map_reload_maybe_8037c64_cmd // 0x00
 // 0x00
@@ -20,7 +20,7 @@
 // pause the current cutscene script for a given number of frames (up to 255)
 // byte1 - memory param
 // byte2 or mem - number of frames to pause
-	.macro cs_pause byte1 byte2
+	.macro cs_pause, byte1, byte2
 	.byte cs_pause_cmd
 	.byte byte1
 	.byte byte2
@@ -32,7 +32,7 @@
 // unlike pause, this supports a longer pause time
 // byte1 - memory param
 // hword2 or mem - number of frames to pause
-	.macro cs_long_pause byte1 hword2
+	.macro cs_long_pause, byte1, hword2
 	.byte cs_long_pause_cmd
 	.byte byte1
 	.hword hword2
@@ -42,7 +42,7 @@
 // 0x04 byte1
 // wait for the chatbox to be cleared
 // byte1 - mask for unknown chatbox flags
-	.macro cs_wait_chatbox byte1
+	.macro cs_wait_chatbox, byte1
 	.byte cs_wait_chatbox_cmd
 	.byte byte1
 	.endmacro
@@ -91,7 +91,7 @@
 // 0x0a byte1
 // wait for cutscene process to end
 // byte1 - offset to cutscene script in cutscene state (which cutscene process)
-	.macro cs_wait_cutscene_process byte1
+	.macro cs_wait_cutscene_process, byte1
 	.byte cs_wait_cutscene_process_cmd
 	.byte byte1
 	.endmacro
@@ -114,7 +114,7 @@
 // 0x0d hword1
 // wait if the given event flag is clear
 // hword1 - flag to test
-	.macro cs_wait_if_flag_clear hword1
+	.macro cs_wait_if_flag_clear, hword1
 	.byte cs_wait_if_flag_clear_cmd
 	.hword hword1
 	.endmacro
@@ -123,7 +123,7 @@
 // 0x0e hword1
 // wait if the given event flag is set
 // hword1 - flag to test
-	.macro cs_wait_if_flag_set hword1
+	.macro cs_wait_if_flag_set, hword1
 	.byte cs_wait_if_flag_set_cmd hword1
 	.endmacro
 
@@ -155,7 +155,7 @@
 // spawn a new cutscene process
 // byte1 - which cutscene process to spawn (cutscene state struct offset to the cutscene script pointer, e.g. oCutsceneState_CutsceneScriptPos2)
 // word2 - cutscene script of the cutscene process
-	.macro cs_spawn_cutscene_process byte1 word2
+	.macro cs_spawn_cutscene_process, byte1, word2
 	.byte cs_spawn_cutscene_process_cmd
 	.byte byte1
 	.word word2
@@ -165,7 +165,7 @@
 // 0x13 byte1
 // kill a cutscene process
 // byte1 - cutscene script ptr struct offset to write to (which cutscene process to kill)
-	.macro cs_kill_cutscene_process byte1
+	.macro cs_kill_cutscene_process, byte1
 	.byte cs_kill_cutscene_process_cmd
 	.byte byte1
 	.endmacro
@@ -174,7 +174,7 @@
 // 0x14 word1
 // set the script to execute for when a cutscene is skipped
 // word1 - script to execute
-	.macro cs_set_cutscene_skip_script word1
+	.macro cs_set_cutscene_skip_script, word1
 	.byte cs_set_cutscene_skip_script_cmd
 	.word word1
 	.endmacro
@@ -193,7 +193,7 @@
 // 0x01/0x15 destination1
 // jump to another script
 // destination1 - script to jump to
-	.macro cs_jump destination1
+	.macro cs_jump, destination1
 	.byte cs_jump_cmd
 	.word destination1
 	.endmacro
@@ -205,7 +205,7 @@
 // byte1 - lower bound for progress byte
 // byte2 - upper bound for progress byte
 // destination3 - script to jump to
-	.macro cs_jump_if_progress_in_range byte1, byte2, destination3
+	.macro cs_jump_if_progress_in_range, byte1, byte2, destination3
 	.byte cs_jump_if_progress_in_range_cmd
 	.byte byte1, byte2
 	.word destination3
@@ -218,7 +218,7 @@
 // byte1 - memory param
 // hword2 - flag to test
 // destination4 - script to jump to
-	.macro cs_jump_if_flag_set byte1, hword2, destination4
+	.macro cs_jump_if_flag_set, byte1, hword2, destination4
 	.byte cs_jump_if_flag_set_cmd
 	.byte byte1
 	.hword hword2
@@ -232,7 +232,7 @@
 // byte1 - number of flags to test
 // hword2 - starting flag to test
 // destination4 - script to jump to
-	.macro cs_jump_if_flag_range_set byte1, hword2, destination4
+	.macro cs_jump_if_flag_range_set, byte1, hword2, destination4
 	.byte cs_jump_if_flag_range_set_cmd
 	.byte byte1
 	.hword hword2
@@ -246,7 +246,7 @@
 // byte1 - memory param
 // hword2 - flag to test
 // destination4 - script to jump to
-	.macro cs_jump_if_flag_clear byte1, hword2, destination4
+	.macro cs_jump_if_flag_clear, byte1, hword2, destination4
 	.byte cs_jump_if_flag_clear_cmd
 	.byte byte1
 	.hword hword2
@@ -269,7 +269,7 @@
 
 // shared command
 	enum cs_jump_if_mem_equals_cmd // 0x1b
-	subenum_start
+	subenum_start 0, 1
 
 	subenum cs_jump_if_byte_equals_subcmd // 0x0
 // 0x07/0x1b 0x00 word2 destination6 byte10
@@ -277,7 +277,7 @@
 // word2 - pointer to read from
 // destination6 - script to jump to
 // byte10 - value to compare [word2] with
-	.macro cs_jump_if_byte_equals word2 destination6 byte10
+	.macro cs_jump_if_byte_equals, word2, destination6, byte10
 	.byte cs_jump_if_mem_equals_cmd
 	.byte cs_jump_if_byte_equals_subcmd
 	.word word2
@@ -291,7 +291,7 @@
 // word2 - pointer to read from
 // destination6 - script to jump to
 // hword10 - value to compare [word2] with
-	.macro cs_jump_if_hword_equals word2 destination6 hword10
+	.macro cs_jump_if_hword_equals, word2, destination6, hword10
 	.byte cs_jump_if_mem_equals_cmd
 	.byte cs_jump_if_hword_equals_subcmd
 	.word word2
@@ -305,7 +305,7 @@
 // word2 - pointer to read from
 // destination6 - script to jump to
 // word10 - value to compare [word2] with
-	.macro cs_jump_if_word_equals_subcmd word2 destination6 word10
+	.macro cs_jump_if_word_equals_subcmd, word2, destination6, word10
 	.byte cs_jump_if_mem_equals_cmd
 	.byte cs_jump_if_word_equals_subcmd
 	.word word2
@@ -319,7 +319,7 @@
 // byte1 - cutscene variable to read from
 // byte2 - value to compare cutscene variable with
 // destination3 - script to jump to
-	.macro cs_jump_if_var_equal byte1 byte2 destination3
+	.macro cs_jump_if_var_equal, byte1, byte2, destination3
 	.byte cs_jump_if_var_equal_cmd
 	.byte byte1
 	.byte byte2
@@ -335,7 +335,7 @@
 // byte2 - lower bound of key item range, inclusive
 // byte3 - upper bound of key item range, inclusive
 // destination4 - script to jump to
-	.macro cs_jump_if_key_item_in_range byte1 byte2 byte3 destination4
+	.macro cs_jump_if_key_item_in_range, byte1, byte2, byte3, destination4
 	.byte cs_jump_if_key_item_in_range_cmd
 	.byte byte1
 	.byte byte2
@@ -352,7 +352,7 @@
 // byte4 - lower bound of chip count, inclusive
 // byte5 - upper bound of chip count, inclusive
 // destination6 - script to jump to
-	.macro cs_jump_if_chip_count_in_range hword1 byte3 byte4 byte5 destination6
+	.macro cs_jump_if_chip_count_in_range, hword1, byte3, byte4, byte5, destination6
 	.byte cs_jump_if_chip_count_in_range_cmd
 	.hword hword1
 	.byte byte3
@@ -366,7 +366,7 @@
 // jump if battle result equals byte1
 // byte1 - value to compare battle result with (0=won, 1=lost, 2=tie, 3=escaped)
 // destination2 - script to jump to
-	.macro cs_jump_if_battle_result_equals byte1 destination2
+	.macro cs_jump_if_battle_result_equals, byte1, destination2
 	.byte cs_jump_if_battle_result_equals_cmd
 	.byte byte1
 	.word destination2
@@ -378,7 +378,7 @@
 // jump if battle result doesn't equal byte1
 // byte1 - value to compare battle result with (0=won, 1=lost, 2=tie, 3=escaped)
 // destination2 - script to jump to
-	.macro cs_jump_if_battle_result_not_equal byte1 destination2
+	.macro cs_jump_if_battle_result_not_equal, byte1, destination2
 	.byte cs_jump_if_battle_result_not_equal_cmd
 	.byte byte1
 	.word destination2
@@ -392,7 +392,7 @@
 // byte1 - byte to compare return value of checkCoordinateTrigger_8031a7a
 // signedbyte2 - signed offset to overworld player object coordinates
 // destination3 - script to jump to
-	.macro cs_coordinate_trigger_equals_cmd_8035afa byte1 signedbyte2 destination3
+	.macro cs_coordinate_trigger_equals_cmd_8035afa, byte1, signedbyte2, destination3
 	.byte cs_coordinate_trigger_equals_cmd_8035afa_cmd
 	.byte byte1
 	.byte signedbyte2
@@ -407,7 +407,7 @@
 // byte1 - byte to compare return value of checkCoordinateTrigger_8031a7a
 // signedbyte2 - signed offset to overworld player object coordinates
 // destination3 - script to jump to
-	.macro cs_coordinate_trigger_not_equal_cmd_8035b44 byte1 signedbyte2 destination3
+	.macro cs_coordinate_trigger_not_equal_cmd_8035b44, byte1, signedbyte2, destination3
 	.byte cs_coordinate_trigger_not_equal_cmd_8035b44_cmd
 	.byte byte1
 	.byte signedbyte2
@@ -420,7 +420,7 @@
 // jump if the player's current navi equals byte1
 // byte1 - navi to compare the current navi with
 // destination2 - script to jump to
-	.macro cs_jump_if_current_navi_equals byte1 destination2
+	.macro cs_jump_if_current_navi_equals, byte1, destination2
 	.byte cs_jump_if_current_navi_equals_cmd
 	.byte byte1
 	.word destination2
@@ -432,7 +432,7 @@
 // jump if the player's current navi doesn't equal byte1
 // byte1 - navi to compare the current navi with
 // destination2 - script to jump to
-	.macro cs_jump_if_current_navi_not_equal byte1 destination2
+	.macro cs_jump_if_current_navi_not_equal, byte1, destination2
 	.byte cs_jump_if_current_navi_not_equal_cmd
 	.byte byte1
 	.word destination2
@@ -443,7 +443,7 @@
 // jump if the title screen icon count equals byte1
 // byte1 - value to compare the title screen icon count with
 // destination2 - script to jump to
-	.macro cs_jump_if_title_screen_icon_count_equals byte1 destination2
+	.macro cs_jump_if_title_screen_icon_count_equals, byte1, destination2
 	.byte cs_jump_if_title_screen_icon_count_equals_cmd
 	.byte byte1
 	.word destination2
@@ -454,7 +454,7 @@
 // jump if the title screen icon count doesn't equal byte1
 // byte1 - value to compare the title screen icon count with
 // destination2 - script to jump to
-	.macro cs_jump_if_title_screen_icon_count_not_equal byte1 destination2
+	.macro cs_jump_if_title_screen_icon_count_not_equal, byte1, destination2
 	.byte cs_jump_if_title_screen_icon_count_not_equal_cmd
 	.byte byte1
 	.word destination2
@@ -480,7 +480,7 @@
 // sets screen fade params for the screen fade when entering a map
 // byte1 - argument 1 for enter map screen fade
 // byte2 - argument 2 for enter map screen fade
-	.macro cs_set_enter_map_screen_fade byte1 byte2
+	.macro cs_set_enter_map_screen_fade, byte1, byte2
 	.byte cs_set_enter_map_screen_fade_cmd
 	.byte byte1
 	.byte byte2
@@ -492,7 +492,7 @@
 // set event flag
 // byte1 - memory param
 // hword2 or mem - event flag to set
-	.macro cs_set_event_flag byte1 hword2
+	.macro cs_set_event_flag, byte1, hword2
 	.byte cs_set_event_flag_cmd
 	.byte byte1
 	.hword hword2
@@ -504,7 +504,7 @@
 // clear event flag
 // byte1 - memory param
 // hword2 or mem - event flag to clear
-	.macro cs_clear_event_flag byte1 hword2
+	.macro cs_clear_event_flag, byte1, hword2
 	.byte cs_clear_event_flag_cmd
 	.byte byte1
 	.hword hword2
@@ -517,7 +517,7 @@
 // event flags set are in the range [hword2, hword2+byte1) (interval notation)
 // byte1 - number of event flags to set
 // hword2 - starting event flag
-	.macro cs_set_event_flag_range byte1 hword2
+	.macro cs_set_event_flag_range, byte1, hword2
 	.byte cs_set_event_flag_range_cmd
 	.byte byte1
 	.hword hword2
@@ -530,7 +530,7 @@
 // event flags cleared are in the range [hword2, hword2+byte1) (interval notation)
 // byte1 - number of event flags to clear
 // hword2 - starting event flag
-	.macro cs_clear_event_flag_range byte1 hword2
+	.macro cs_clear_event_flag_range, byte1, hword2
 	.byte cs_clear_event_flag_range_cmd
 	.byte byte1
 	.hword hword2
@@ -541,7 +541,7 @@
 // 0x23/0x2d word1
 // set the list of event flags at word1, terminated by (presumably) -1
 // word1 - list of event flags to set, terminated by a negative number (presumably -1)
-	.macro cs_set_event_flag_list word1
+	.macro cs_set_event_flag_list, word1
 	.byte cs_set_event_flag_list_cmd
 	.word word1
 	.endmacro
@@ -551,7 +551,7 @@
 // 0x24/0x2e word1
 // clear the list of event flags at word1, terminated by (presumably) -1
 // word1 - list of event flags to clear, terminated by a negative number (presumably -1)
-	.macro cs_clear_event_flag_list word1
+	.macro cs_clear_event_flag_list, word1
 	.byte cs_clear_event_flag_list_cmd
 	.word word1
 	.endmacro
@@ -563,7 +563,7 @@
 // [word1] = byte5
 // word1 - pointer to write to
 // byte5 - value to write
-	.macro cs_write_byte word1 byte5
+	.macro cs_write_byte, word1, byte5
 	.byte cs_write_byte_cmd
 	.word word1
 	.byte byte5
@@ -576,7 +576,7 @@
 // [word1] = hword5
 // word1 - pointer to write to
 // hword5 - value to write
-	.macro cs_write_hword word1 hword5
+	.macro cs_write_hword, word1, hword5
 	.byte cs_write_hword_cmd
 	.word word1
 	.hword hword5
@@ -589,7 +589,7 @@
 // [word1] = word5
 // word1 - pointer to write to
 // word5 - value to write
-	.macro cs_write_word word1 word5
+	.macro cs_write_word, word1, word5
 	.byte cs_write_word_cmd
 	.word word1
 	.word word5
@@ -602,7 +602,7 @@
 // [eGameState + byte1] = byte2
 // byte1 - eGameState field to write to
 // byte2 - value to write
-	.macro cs_write_gamestate_byte byte1 byte2
+	.macro cs_write_gamestate_byte, byte1, byte2
 	.byte cs_write_gamestate_byte_cmd
 	.byte byte1
 	.byte byte2
@@ -615,7 +615,7 @@
 // [eStruct2001c04 + byte1] = byte2
 // byte1 - eStruct2001c04 field to write to
 // byte2 - value to write
-	.macro cs_write_eStruct2001c04_byte byte1 byte2
+	.macro cs_write_eStruct2001c04_byte, byte1, byte2
 	.byte cs_write_eStruct2001c04_byte_cmd
 	.byte byte1
 	.byte byte2
@@ -626,7 +626,7 @@
 // literal interpretation:
 // [[eCutsceneState_owMapObjectPtrs_44+byte1*4]+byte2] = byte3
 // may not actually be ow map object ptrs, but not sure
-	.macro cs_write_byte_to_extended_var_plus_param byte1 byte2 byte3
+	.macro cs_write_byte_to_extended_var_plus_param, byte1, byte2, byte3
 	.byte cs_write_byte_to_extended_var_plus_param_cmd
 	.byte byte1
 	.byte byte2
@@ -639,7 +639,7 @@
 // literal interpretation: [eCutsceneState+byte1] = byte2
 // byte1 - variable to modify
 // byte2 - new value of variable
-	.macro cs_set_var byte1 byte2
+	.macro cs_set_var, byte1, byte2
 	.byte cs_set_var_cmd
 	.byte byte1
 	.byte byte2
@@ -650,7 +650,7 @@
 // 0x2c/0x36 word1
 // call LoadGFXAnim(r0=word1)
 // word1 - argument to LoadGFXAnim
-	.macro cs_load_gfx_anim word1
+	.macro cs_load_gfx_anim, word1
 	.byte cs_load_gfx_anim_cmd
 	.word word1
 	.endmacro
@@ -660,7 +660,7 @@
 // 0x2d/0x37 word1
 // do LoadGFXAnims(r0=word1)
 // r0 is a list of pointers for LoadGFXAnim, terminated by negative
-	.macro cs_load_gfx_anims word1
+	.macro cs_load_gfx_anims, word1
 	.byte cs_load_gfx_anims_cmd
 	.word word1
 	.endmacro
@@ -679,14 +679,14 @@
 // 0x2f/0x39 byte1
 // terminate the given gfx anim
 // byte1 - index of gfx anim to terminate
-	.macro cs_terminate_gfx_anim byte1
+	.macro cs_terminate_gfx_anim, byte1
 	.byte cs_terminate_one_or_all_gfx_anims_cmd
 	.byte byte1
 	.endmacro
 
 // 0x2f/0x39 0xff
 // terminate all gfx anims
-	.macro cs_terminate_all_gfx_anims byte1
+	.macro cs_terminate_all_gfx_anims, byte1
 	.byte cs_terminate_one_or_all_gfx_anims_cmd
 	.byte 0xff
 	.endmacro
@@ -697,7 +697,7 @@
 // byte1 - memory param
 // byte2 or mem - text script to run
 // the length of the command is 2 if from mem, otherwise 3
-	.macro cs_run_text_script byte1 byte2
+	.macro cs_run_text_script, byte1, byte2
 	.byte cs_run_text_script_cmd
 	.byte byte1
 	.if byte1 != 0xff
@@ -714,13 +714,13 @@
 	.endmacro
 
 	enum cs_set_or_clear_chatbox_flags_cmd // 0x3c
-	subenum_start
+	subenum_start 0, 1
 
 	subenum cs_set_chatbox_flags_subcmd // 0x0
 // 0x3c 0x0 byte2
 // set chatbox flags
 // byte2 - flags to set or clear
-	.macro cs_set_chatbox_flags byte2
+	.macro cs_set_chatbox_flags, byte2
 	.byte cs_set_or_clear_chatbox_flags_cmd
 	.byte cs_set_chatbox_flags_subcmd
 	.byte byte2
@@ -731,7 +731,7 @@
 // set or clear chatbox flags
 // byte1 - operation type (0 = set, 1 = clear)
 // byte2 - flags to set or clear
-	.macro cs_clear_chatbox_flags byte2
+	.macro cs_clear_chatbox_flags, byte2
 	.byte cs_set_or_clear_chatbox_flags_cmd
 	.byte cs_clear_chatbox_flags_subcmd
 	.byte byte2
@@ -743,7 +743,7 @@
 // 0 jumps to destination1, 1 jumps to destination5, 2 jumps to destination9...
 // destinationX - script to jump to
 // the length of this command is unknown, but the max length should be 33
-	.macro cs_switch_case_from_chatbox_flags_bit0_to_2 destination1 destination5 destination9, destination13, destination17, destination21, destination25, destination29
+	.macro cs_switch_case_from_chatbox_flags_bit0_to_2, destination1, destination5, destination9, destination13, destination17, destination21, destination25, destination29
 	.byte cs_switch_case_from_chatbox_flags_bit0_to_2_cmd
 	.word destination1
 	.word destination5
@@ -760,7 +760,7 @@
 // store text archive pointer
 // the text archive may be compressed
 // word1 - text archive pointer. bit 31 indicates if it is compressed
-	.macro cs_decomp_text_archive word1
+	.macro cs_decomp_text_archive, word1
 	.byte cs_decomp_text_archive_cmd
 	.word word1
 	.endmacro
@@ -918,7 +918,7 @@
 // byte1 - special to call (multiple of 4)
 // byte2 - memory param
 // byte3 or mem - argument to special
-	.macro cs_ow_player_sprite_special_with_arg byte1 byte2 byte3
+	.macro cs_ow_player_sprite_special_with_arg, byte1, byte2, byte3
 	.byte cs_ow_player_sprite_special_with_arg_cmd
 	.byte byte1
 	.byte byte2
@@ -939,7 +939,7 @@
 // 0x4 - copy player coords to player next coords, write hword params to player coords, then indirectly set player coords through eStruct200ace0
 // 0x8 - add hword params to the player coords at eStruct200ace0
 // 0xc - copy player coords to player next coords, offset player coords by hword params, then add hword params to the player coords at eStruct200ace0
-	.macro cs_ow_player_coord_special byte1 byte2 byte3 signedhword4 signedhword6 signedhword8
+	.macro cs_ow_player_coord_special, byte1, byte2, byte3, signedhword4, signedhword6, signedhword8
 	.byte cs_ow_player_coord_special_cmd
 	.byte byte1
 	.byte byte2
@@ -957,7 +957,7 @@
 // byte1 - memory param
 // byte2 or mem - number of frames to move player
 // signedhword3 - movement speed of player
-	.macro cs_move_player_in_facing_direction byte1 byte2 signedhword3
+	.macro cs_move_player_in_facing_direction, byte1, byte2, signedhword3
 	.byte cs_move_player_in_facing_direction_cmd
 	.byte byte1
 	.byte byte2
@@ -970,7 +970,7 @@
 // literal interpretation: write byte2 or mem to eStruct200ace0_Unk_1a if eStruct200ace0_fixOWPlayerAnim_15 is nonzero
 // byte1 - memory param
 // byte2 or mem - loaded to r0 when owPlayer_809e218 is called
-	.macro cs_ow_player_cmd_8037cc4 byte1 byte2
+	.macro cs_ow_player_cmd_8037cc4, byte1, byte2
 	.byte cs_ow_player_cmd_8037cc4_cmd
 	.byte byte1
 	.byte byte2
@@ -979,13 +979,13 @@
 	enum cs_write_S200ace0_unk_20_cmd // 0x44
 // 0x44 word1
 // literal interpretation: [eStruct200ace0_Unk_20] = word1
-	.macro cs_write_S200ace0_unk_20 word1
+	.macro cs_write_S200ace0_unk_20, word1
 	.byte cs_write_S200ace0_unk_20_cmd
 	.word word1
 	.endmacro
 
 	enum cs_transform_player_navi_sprite_cmd // 0x45
-	subenum_start
+	subenum_start 0, 1
 
 	subenum cs_set_custom_player_navi_sprite_transform_subcmd // 0x0
 // 0x45 0x0 byte2 byte3 byte4
@@ -993,7 +993,7 @@
 // byte2 - horizontal compress value
 // byte3 - vertical compress value
 // byte4 - rotation value
-	.macro cs_set_custom_player_navi_sprite_transform byte2 byte3 byte4
+	.macro cs_set_custom_player_navi_sprite_transform, byte2, byte3, byte4
 	.byte cs_transform_player_navi_sprite_cmd
 	.byte cs_set_custom_player_navi_sprite_transform_subcmd
 	.byte byte2
@@ -1004,7 +1004,7 @@
 	subenum cs_set_default_player_navi_sprite_transform_subcmd // 0x1
 // 0x45 0x1
 // set the default transform (0x40, 0x40, 0x0) to the player navi sprite
-	.macro cs_set_default_player_navi_sprite_transform byte2 byte3 byte4
+	.macro cs_set_default_player_navi_sprite_transform, byte2, byte3, byte4
 	.byte cs_transform_player_navi_sprite_cmd
 	.byte cs_set_default_player_navi_sprite_transform_subcmd
 	.endmacro
@@ -1016,7 +1016,7 @@
 // signedbyte3 - horizontal compress offset
 // signedbyte4 - vertical compress offset
 // signedbyte5 - rotation offset
-	.macro cs_set_offset_player_navi_sprite_transform byte2 signedbyte3 signedbyte4 signedbyte5
+	.macro cs_set_offset_player_navi_sprite_transform, byte2, signedbyte3, signedbyte4, signedbyte5
 	.byte cs_transform_player_navi_sprite_cmd
 	.byte cs_set_offset_player_navi_sprite_transform_subcmd
 	.byte byte2
@@ -1026,13 +1026,13 @@
 	.endmacro
 
 	enum cs_set_ow_player_navi_color_shader_cmd // 0x46
-	subenum_start
+	subenum_start 0, 1
 
 	subenum cs_set_custom_ow_player_navi_color_shader_subcmd // 0x0
 // 0x46 0x0 hword2
 // set a custom overworld player navi color shader
 // hword2 - new color shader as 15bit RGB
-	.macro cs_set_custom_ow_player_navi_color_shader hword2
+	.macro cs_set_custom_ow_player_navi_color_shader, hword2
 	.byte cs_set_ow_player_navi_color_shader_cmd
 	.byte cs_set_custom_ow_player_navi_color_shader_cmd
 	.hword hword2
@@ -1047,7 +1047,7 @@
 	.endmacro
 
 	enum cs_write_or_offset_ow_player_fixed_anim_select_8037dac_cmd // 0x47
-	subenum_start
+	subenum_start 0, 1
 
 	subenum cs_write_ow_player_fixed_anim_select_8037dac_subcmd // 0x0
 // 0x47 byte1 byte2 byte3
@@ -1055,7 +1055,7 @@
 // byte1 - modify type. 0=write, 1=add anim to facing direction and write
 // byte2 - memory param
 // byte3 or mem - base overworld player anim
-	.macro cs_write_ow_player_fixed_anim_select_8037dac byte2 byte3
+	.macro cs_write_ow_player_fixed_anim_select_8037dac, byte2, byte3
 	.byte cs_write_or_offset_ow_player_fixed_anim_select_8037dac_cmd
 	.byte cs_write_ow_player_fixed_anim_select_8037dac_subcmd
 	.byte byte2
@@ -1075,14 +1075,14 @@
 // set the player coordinates and animation to the given npc, and set the player facing direction
 // byte1 - index of the npc to copy coords and anim from
 // byte2 - new facing direction of the player
-	.macro cs_set_player_coords_anim_facing_as_npc byte1 byte2
+	.macro cs_set_player_coords_anim_facing_as_npc, byte1, byte2
 	.byte cs_set_player_coords_anim_facing_as_npc_cmd
 	.byte byte1
 	.byte byte2
 	.endmacro
 
 	enum cs_spawn_free_ow_map_object_specials_cmd // 0x49
-	subenum_start
+	subenum_start 0, 1
 // 0x49 byte1 ...
 // run special related to spawning or freeing OW map objects
 // subcommands documented below
@@ -1098,7 +1098,7 @@
 // hword5 - map object y coordinate
 // hword7 - map object z coordinate
 // word9 - unknown param (written to field oOverworldMapObject_Unk_04)
-	.macro cs_spawn_ow_map_object nybble1 byte2 hword3 hword5 hword7 word9
+	.macro cs_spawn_ow_map_object, nybble1, byte2, hword3, hword5, hword7, word9
 	.byte cs_spawn_free_ow_map_object_specials_cmd
 	nybble cs_spawn_ow_map_object_subcmd, nybble1
 	.byte byte2
@@ -1117,7 +1117,7 @@
 // signedhword5 - map object y coordinate offset to player
 // signedhword7 - map object z coordinate offset to player
 // word9 - unknown param (written to field oOverworldMapObject_Unk_04)
-	.macro cs_spawn_ow_map_object_rel_to_ow_player nybble1 byte2 hword3 hword5 hword7 word9
+	.macro cs_spawn_ow_map_object_rel_to_ow_player, nybble1, byte2, hword3, hword5, hword7, word9
 	.byte cs_spawn_free_ow_map_object_specials_cmd
 	nybble cs_spawn_ow_map_object_rel_to_ow_player_subcmd, nybble1
 	.byte byte2
@@ -1137,7 +1137,7 @@
 // signedhword6 - map object y coordinate offset to npc
 // signedhword8 - map object z coordinate offset to npc
 // word10 - unknown param (written to field oOverworldMapObject_Unk_04)
-	.macro cs_spawn_ow_map_object_rel_to_ow_npc nybble1 byte2 byte3 hword4 hword6 hword8 word10
+	.macro cs_spawn_ow_map_object_rel_to_ow_npc, nybble1, byte2, byte3, hword4, hword6, hword8, word10
 	.byte cs_spawn_free_ow_map_object_specials_cmd
 	nybble cs_spawn_ow_map_object_rel_to_ow_npc_subcmd, nybble1
 	.byte byte2
@@ -1152,7 +1152,7 @@
 // 0x49 0x3X
 // free overworld map object created via a cutscene
 // byte1 lower nybble - which map object to free, from the list of cutscene state map object ptrs
-	.macro cs_free_ow_map_object nybble1
+	.macro cs_free_ow_map_object, nybble1
 	.byte cs_spawn_free_ow_map_object_specials_cmd
 	nybble cs_free_ow_map_object_subcmd, nybble1
 	.endmacro
@@ -1166,7 +1166,7 @@
 	.endmacro
 
 	enum cs_spawn_or_free_ow_map_or_npc_objects_cmd // 0x4a
-	subenum_start
+	subenum_start 0, 1
 
 	subenum cs_spawn_objects_from_list_subcmd // 0x0
 // 0x4a 0x0 word2
@@ -1180,7 +1180,7 @@
 // word8 - y coordinate
 // word0xc - z coordinate
 // word0x10 - param (written to field 0x4)
-	.macro cs_spawn_objects_from_list word2
+	.macro cs_spawn_objects_from_list, word2
 	.byte cs_spawn_or_free_ow_map_or_npc_objects_cmd
 	.byte cs_spawn_objects_from_list_subcmd
 	.word word2
@@ -1191,7 +1191,7 @@
 // free all objects of specified types
 // byte2 - bitfield of objects to free
 // see constants/constants.inc for object type flags
-	.macro cs_free_all_objects_of_types byte2
+	.macro cs_free_all_objects_of_types, byte2
 	.byte cs_spawn_or_free_ow_map_or_npc_objects_cmd
 	.byte cs_free_all_objects_of_types_subcmd
 	.byte byte2
@@ -1202,7 +1202,7 @@
 // free all npc objects, then spawn npc objects from a list. terminated by 0xff
 // struct format: word0
 // word0 - animation script pointer
-	.macro cs_spawn_ow_npc_objects_from_list word2
+	.macro cs_spawn_ow_npc_objects_from_list, word2
 	.byte cs_spawn_or_free_ow_map_or_npc_objects_cmd
 	.byte cs_spawn_ow_npc_objects_from_list_subcmd
 	.byte word2
@@ -1236,7 +1236,7 @@
 // 0x4b word1
 // call native function. if the return flags are nonzero, then wait
 // word1 - native function to call
-	.macro cs_call_native_with_return_value word1
+	.macro cs_call_native_with_return_value, word1
 	.byte cs_call_native_with_return_value_cmd
 	.word word1
 	.endmacro
@@ -1253,7 +1253,7 @@
 // 0x4c &0x20 word2
 // literal interpretation: [eCutsceneState_Unk_34] = word2
 // word2 - warp related pointer
-	.macro cs_warp_cmd_8038040_1 word2
+	.macro cs_warp_cmd_8038040_1, word2
 	.byte cs_warp_cmd_8038040_cmd
 	.byte 0x20
 	.word word2
@@ -1266,7 +1266,7 @@
 // call warp_setSubsystemIndexTo0x14AndOthers_8005f14 with r0=word3, r1=0, r2=byte2
 // else:
 // call warp_setSubsystemIndexTo0x10AndOthers_8005f00 with r0=word3, r1=0, r2=byte2
-	.macro cs_warp_cmd_8038040_2 byte1 byte2 word3
+	.macro cs_warp_cmd_8038040_2, byte1, byte2, word3
 	.byte cs_warp_cmd_8038040_cmd
 	.byte byte1
 	.byte byte2
@@ -1278,7 +1278,7 @@
 // 0x30/0x4d hword1
 // play sound
 // hword1 - sound to play
-	.macro cs_play_sound hword1
+	.macro cs_play_sound, hword1
 	.byte cs_play_sound_cmd
 	.hword hword1
 	.endmacro
@@ -1288,7 +1288,7 @@
 // 0x31/0x4e hword1
 // play music
 // hword1 - music to play. if this is negative, then play the current map music
-	.macro cs_play_music hword1
+	.macro cs_play_music, hword1
 	.byte cs_play_music_cmd
 	.hword hword1
 	.endmacro
@@ -1297,7 +1297,7 @@
 	enum cs_sound_cmd_80380ea_cmd // 0x4f
 // 0x32/0x4f hword1 byte3 byte4
 // call sound_80006A2 with r0=hword1, r1=byte3, r2=byte4
-	.macro cs_sound_cmd_80380ea hword1 byte3 byte4
+	.macro cs_sound_cmd_80380ea, hword1, byte3, byte4
 	.byte cs_sound_cmd_80380ea_cmd
 	.hword hword1
 	.byte byte3
@@ -1308,7 +1308,7 @@
 	enum cs_sound_cmd_803810e_cmd // 0x50
 // 0x33/0x50 byte1 byte2
 // call sound_800068A with r0=byte1, r1=byte2 then do [eGameState_BGMusicIndicator] = 0x63
-	.macro cs_sound_cmd_803810e byte1 byte2
+	.macro cs_sound_cmd_803810e, byte1, byte2
 	.byte cs_sound_cmd_803810e_cmd
 	.byte byte1
 	.byte byte2
@@ -1324,14 +1324,14 @@
 
 // shared command
 	enum cs_give_or_take_item_cmd // 0x52
-	subenum_start
+	subenum_start 0, 1
 
 	subenum cs_give_item_subcmd // 0x0
 // 0x35/0x52 0x0 byte2 byte3
 // give items
 // byte2 - item to give
 // byte3 - quantity of item
-	.macro cs_give_item byte2 byte3
+	.macro cs_give_item, byte2, byte3
 	.byte cs_give_or_take_item_cmd
 	.byte cs_give_item_subcmd
 	.byte byte2
@@ -1343,7 +1343,7 @@
 // take items
 // byte2 - item to take
 // byte3 - quantity of item
-	.macro cs_take_item byte2 byte3
+	.macro cs_take_item, byte2, byte3
 	.byte cs_give_or_take_item_cmd
 	.byte cs_take_item_subcmd
 	.byte byte2
@@ -1356,20 +1356,20 @@
 // trigger a PET overworld effect
 // byte1 - memory param
 // byte2 or mem - PET overworld effect to trigger
-	.macro cs_do_pet_effect byte1 byte2
+	.macro cs_do_pet_effect, byte1, byte2
 	.byte cs_do_pet_effect_cmd
 	.byte byte1
 	.byte byte2
 	.endmacro
 
 	enum cs_run_or_stop_cutscene_camera_script_cmd // 0x54
-	subenum_start
+	subenum_start 0, 1
 
 	subenum cs_run_cutscene_camera_script_subcmd // 0x0
 // 0x54 0x0 word1
 // set cutscene camera script
 // word1 - cutscene camera script pointer
-	.macro cs_run_cutscene_camera_script word1
+	.macro cs_run_cutscene_camera_script, word1
 	.byte cs_run_or_stop_cutscene_camera_script_cmd
 	.byte cs_run_cutscene_camera_script_subcmd
 	.word word1
@@ -1387,7 +1387,7 @@
 // 0x55 hword1
 // start a fixed battle (i.e. a non-random encounter battle)
 // hword1 - battle index
-	.macro cs_start_fixed_battle hword1
+	.macro cs_start_fixed_battle, hword1
 	.byte cs_start_fixed_battle_cmd
 	.hword hword1
 	.endmacro
@@ -1405,7 +1405,7 @@
 	enum cs_init_eStruct200a6a0_cmd // 0x58
 // 0x38/0x58 word1 word5 word9
 // call Initialize_eStruct200a6a0 with r0=word1, r1=word5, r2=word9
-	.macro cs_init_eStruct200a6a0 word1 word5 word9
+	.macro cs_init_eStruct200a6a0, word1, word5, word9
 	.byte cs_init_eStruct200a6a0_cmd
 	.word word1
 	.word word5
@@ -1426,7 +1426,7 @@
 // byte1 - shake type
 // byte2 - shake timer
 // byte3 - unused
-	.macro cs_do_camera_shake byte1 byte2 byte3
+	.macro cs_do_camera_shake, byte1, byte2, byte3
 	.byte cs_do_camera_shake_cmd
 	.byte byte1
 	.byte byte2
@@ -1437,7 +1437,7 @@
 // 0x5b byte1
 // functions as a nop
 // byte1 - unused
-	.macro cs_nop_8038246 byte1
+	.macro cs_nop_8038246, byte1
 	.byte cs_nop_8038246_cmd
 	.byte byte1
 	.endmacro
@@ -1475,7 +1475,7 @@
 // 0x3b/0x60 byte1
 // init scenario effect
 // byte1 - scenario effect to initialize (0=soul weapons counter, 1=mr. weather comp rainbow gauge)
-	.macro cs_init_scenario_effect byte1
+	.macro cs_init_scenario_effect, byte1
 	.byte cs_init_scenario_effect_cmd
 	.byte byte1
 	.endmacro
@@ -1493,7 +1493,7 @@
 // 0x3d/0x62 byte1
 // init minigame effect
 // byte1 - minigame effect to initialize (0=AquaMan, 1=SlashMan, 2=TenguMan, 3=ElecMan, 4=EraseMan, 5=GroundMan).
-	.macro cs_init_minigame_effect byte1
+	.macro cs_init_minigame_effect, byte1
 	.byte cs_init_minigame_effect_cmd
 	.byte byte1
 	.endmacro
@@ -1515,7 +1515,7 @@
 // i.e. [hword1, hword1+byte3) (interval notation)
 // hword1 - starting bbs message flag
 // byte3 - number of bbs messages to add
-	.macro cs_add_bbs_message_range hword1 byte3
+	.macro cs_add_bbs_message_range, hword1, byte3
 	.byte cs_add_bbs_message_range_cmd
 	.hword hword1
 	.byte byte3
@@ -1524,7 +1524,7 @@
 	enum cs_encryption_cmd_80382de_cmd // 0x68
 // 0x68 hword1
 // call encryption_8006e70 with r0=hword1
-	.macro cs_encryption_cmd_80382de hword1
+	.macro cs_encryption_cmd_80382de, hword1
 	.byte cs_encryption_cmd_80382de_cmd
 	.hword hword1
 	.endmacro
@@ -1540,7 +1540,7 @@
 // 0x6a byte1
 // change the player navi?
 // byte1 - navi to switch to
-	.macro cs_change_navi_maybe_80382fe byte1
+	.macro cs_change_navi_maybe_80382fe, byte1
 	.byte cs_change_navi_maybe_80382fe_cmd
 	.byte byte1
 	.endmacro
@@ -1552,7 +1552,7 @@
 // i.e. [hword1, hword1+byte3) (interval notation)
 // hword1 - starting mail flag
 // byte3 - number of mails to add
-	.macro cs_add_mail_range hword1 byte3
+	.macro cs_add_mail_range, hword1, byte3
 	.byte cs_add_mail_range_cmd
 	.hword hword1
 	.byte byte3
@@ -1562,7 +1562,7 @@
 	enum cs_cmd_8038346_cmd // 0x6c
 // 0x43/0x6c word1 word5
 // call sub_80356F8 with r0=word1 and r1=word5
-	.macro cs_cmd_8038346 word1 word5
+	.macro cs_cmd_8038346, word1, word5
 	.byte cs_cmd_8038346_cmd
 	.word word1
 	.word word5
@@ -1571,13 +1571,13 @@
 	enum_skip 2 // 0x6d, 0x6e
 
 	enum cs_give_or_take_zenny_cmd // 0x6f
-	subenum_start
+	subenum_start 0, 1
 
 	subenum cs_give_zenny_subcmd // 0x0
 // 0x6f 0x00 hword2
 // give zenny
 // hword2 - amount to give
-	.macro cs_give_zenny hword2
+	.macro cs_give_zenny, hword2
 	.byte cs_give_or_take_zenny_cmd
 	.byte cs_give_zenny_subcmd
 	.hword hword2
@@ -1587,20 +1587,20 @@
 // 0x6f 0x01 hword2
 // take zenny
 // hword2 - amount to take
-	.macro cs_take_zenny hword2
+	.macro cs_take_zenny, hword2
 	.byte cs_give_or_take_zenny_cmd
 	.byte cs_take_zenny_subcmd
 	.hword hword2
 	.endmacro
 
 	enum cs_give_or_take_bugfrags_cmd // 0x70
-	subenum_start
+	subenum_start 0, 1
 
 	subenum cs_give_bugfrags_subcmd // 0x0
 // 0x70 0x00 hword2
 // give bugfrags
 // hword2 - amount to give
-	.macro cs_give_bugfrags hword2
+	.macro cs_give_bugfrags, hword2
 	.byte cs_give_or_take_bugfrags_cmd
 	.byte cs_give_bugfrags_subcmd
 	.hword hword2
@@ -1610,7 +1610,7 @@
 // 0x70 0x01 hword2
 // take bugfrags
 // hword2 - amount to take
-	.macro cs_take_bugfrags hword2
+	.macro cs_take_bugfrags, hword2
 	.byte cs_give_or_take_bugfrags_cmd
 	.byte cs_take_bugfrags_subcmd
 	.hword hword2
@@ -1619,7 +1619,7 @@
 	enum_skip 2 // 0x71, 0x72
 
 	enum cs_give_or_take_chips_cmd // 0x73
-	subenum_start
+	subenum_start 0, 1
 
 	subenum cs_give_chips_subcmd // 0x0
 // 0x73 0x00 hword2 byte4 byte5
@@ -1627,7 +1627,7 @@
 // hword2 - chip to give
 // byte4 - chip code
 // byte5 - quantity of chips
-	.macro cs_give_chips hword2 byte4 byte5
+	.macro cs_give_chips, hword2, byte4, byte5
 	.byte cs_give_or_take_chips_cmd
 	.byte cs_give_chips_subcmd
 	.hword hword2
@@ -1641,7 +1641,7 @@
 // hword2 - chip to take
 // byte4 - chip code
 // byte5 - quantity of chips
-	.macro cs_take_chips hword2 byte4 byte5
+	.macro cs_take_chips, hword2, byte4, byte5
 	.byte cs_give_or_take_chips_cmd
 	.byte cs_take_chips_subcmd
 	.hword hword2
@@ -1650,7 +1650,7 @@
 	.endmacro
 
 	enum cs_give_or_take_navicust_programs_cmd // 0x74
-	subenum_start
+	subenum_start 0, 1
 
 	subenum cs_give_navicust_programs_subcmd // 0x0
 // 0x74 0x00 hword2 byte4 byte5
@@ -1658,7 +1658,7 @@
 // hword2 - navicust program to give
 // byte4 - color of the navicust program
 // byte5 - quantity of the navicust program
-	.macro cs_give_navicust_programs hword2 byte4 byte5
+	.macro cs_give_navicust_programs, hword2, byte4, byte5
 	.byte cs_give_or_take_navicust_programs_cmd
 	.byte cs_give_navicust_programs_subcmd
 	.hword hword2
@@ -1672,7 +1672,7 @@
 // hword2 - navicust program to take
 // byte4 - color of the navicust program
 // byte5 - quantity of the navicust program
-	.macro cs_take_navicust_programs hword2 byte4 byte5
+	.macro cs_take_navicust_programs, hword2, byte4, byte5
 	.byte cs_give_or_take_navicust_programs_cmd
 	.byte cs_take_navicust_programs_subcmd
 	.hword hword2
@@ -1681,13 +1681,13 @@
 	.endmacro
 
 	enum cs_cutscene_run_or_end_secondary_continuous_map_script_cmd // 0x75
-	subenum_start
+	subenum_start 0, 1
 
 	subenum cs_cutscene_run_secondary_continuous_map_script_subcmd // 0x0
 // 0x75 0x0 word2
 // set the secondary continuous map script pointer
 // word2 - map script pointer to set the secondary continuous map script pointer to
-	.macro cs_cutscene_run_secondary_continuous_map_script word2
+	.macro cs_cutscene_run_secondary_continuous_map_script, word2
 	.byte cs_cutscene_run_or_end_secondary_continuous_map_script_cmd
 	.byte cs_cutscene_run_secondary_continuous_map_script_subcmd
 	.word word2
@@ -1702,13 +1702,13 @@
 	.endmacro
 
 	enum cs_store_or_load_game_progress_buffer_maybe_803843c_cmd // 0x76
-	subenum_start
+	subenum_start 0, 1
 
 	subenum cs_store_game_progress_buffer_maybe_803843c_subcmd // 0x0
 // 0x76 0x00 byte2
 // store the current game progress to a buffer
 // byte2 - index of the buffer to use
-	.macro cs_store_game_progress_buffer_maybe_803843c byte2
+	.macro cs_store_game_progress_buffer_maybe_803843c, byte2
 	.byte cs_store_or_load_game_progress_buffer_maybe_803843c_cmd
 	.byte cs_store_game_progress_buffer_maybe_803843c_subcmd
 	.byte byte2
@@ -1718,7 +1718,7 @@
 // 0x76 0x01 byte2
 // load the current game progress from a buffer
 // byte2 - index of the buffer to use
-	.macro cs_load_game_progress_buffer_maybe_803843c byte2
+	.macro cs_load_game_progress_buffer_maybe_803843c, byte2
 	.byte cs_store_or_load_game_progress_buffer_maybe_803843c_cmd
 	.byte cs_load_game_progress_buffer_maybe_803843c_subcmd
 	.byte byte2
@@ -1731,7 +1731,7 @@
 // call testSetClearFlags_803553c
 // else:
 // call clearSetFlags_80355a8
-	.macro cs_flag_cmd_8038466 byte1
+	.macro cs_flag_cmd_8038466, byte1
 	.byte cs_flag_cmd_8038466_cmd
 	.byte byte1
 	.endmacro
@@ -1743,7 +1743,7 @@
 // i.e. [hword1, hword1+byte3) (interval notation)
 // hword1 - starting bbs request flag
 // byte3 - number of bbs requests to add
-	.macro cs_add_request_range hword1 byte3
+	.macro cs_add_request_range, hword1, byte3
 	.byte cs_add_request_range_cmd
 	.hword hword1
 	.byte byte3
@@ -1756,7 +1756,7 @@
 // but it isn't triggered when using a piece of rush food
 // unused1to3 - unused
 // destination4 - script to jump to
-	.macro cs_rush_food_cmd_80384A8 destination4
+	.macro cs_rush_food_cmd_80384A8, destination4
 	.byte cs_rush_food_cmd_80384A8_cmd
 	.byte 0, 0, 0
 	.word destination4
@@ -1774,7 +1774,7 @@
 // jump if the player is master rank for the request bbs
 // unused1to3 - unused
 // destination4 - script to jump to
-	.macro cs_jump_if_req_bbs_master_rank destination4
+	.macro cs_jump_if_req_bbs_master_rank, destination4
 	.byte cs_jump_if_req_bbs_master_rank_cmd
 	.byte 0, 0, 0
 	.word destination4
@@ -1786,7 +1786,7 @@
 // unused1to3 - unused
 // destination4 - script to jump to if in the real world
 // destination8 - script to jump to if on the internet
-	.macro cs_if_in_real_world_jump_else_jump destination4, destination8
+	.macro cs_if_in_real_world_jump_else_jump, destination4, destination8
 	.byte cs_if_in_real_world_jump_else_jump_cmd
 	.byte 0, 0, 0
 	.word destination4

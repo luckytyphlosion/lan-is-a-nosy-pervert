@@ -1,5 +1,5 @@
 
-	enum_start
+	enum_start 0, 1
 
 	enum npc_end_cmd // 0x00
 // 0x00
@@ -14,7 +14,7 @@
 // 0x02 destination1
 // jump to another script
 // destination1 - script to jump to
-	.macro npc_jump destination1
+	.macro npc_jump, destination1
 	.byte npc_jump_cmd
 	.word destination1
 	.endmacro
@@ -31,7 +31,7 @@
 // jump if the given event flag is set
 // hword1 - event flag to test
 // destination3 - script to jump to
-	.macro npc_jump_if_flag_set hword1 destination3
+	.macro npc_jump_if_flag_set, hword1, destination3
 	.byte npc_jump_if_flag_set_cmd
 	.hword hword1
 	.word destination3
@@ -42,7 +42,7 @@
 // jump if the given event flag is clear
 // hword1 - event flag to test
 // destination3 - script to jump to
-	.macro npc_jump_if_flag_clear hword1 destination3
+	.macro npc_jump_if_flag_clear, hword1, destination3
 	.byte npc_jump_if_flag_clear_cmd
 	.hword hword1
 	.word destination3
@@ -52,7 +52,7 @@
 // 0x06 hword1
 // set event flag
 // hword1 - event flag to set
-	.macro npc_set_event_flag hword1
+	.macro npc_set_event_flag, hword1
 	.byte npc_set_event_flag_cmd
 	.hword hword1
 	.endmacro
@@ -61,7 +61,7 @@
 // 0x07 hword1
 // clear event flag
 // hword1 - event flag to clear
-	.macro npc_clear_event_flag hword1
+	.macro npc_clear_event_flag, hword1
 	.byte npc_clear_event_flag_cmd
 	.hword hword1
 	.endmacro
@@ -84,7 +84,7 @@
 // 0x0a byte1
 // set npc collision radius
 // byte1 - new value of collision radius
-	.macro npc_set_collision_radius byte1
+	.macro npc_set_collision_radius, byte1
 	.byte npc_set_collision_radius_cmd
 	.byte byte1
 	.endmacro
@@ -96,7 +96,7 @@
 // between two objects for them to interact
 // e.g. talking to an NPC on a slope
 // byte1 - new z reach value
-	.macro npc_set_z_reach byte1
+	.macro npc_set_z_reach, byte1
 	.byte npc_set_z_reach_cmd
 	.byte byte1
 	.endmacro
@@ -113,7 +113,7 @@
 // signedbyte1 - x offset for npc center
 // signedbyte2 - y offset for npc center
 // signedbyte3 - z offset for npc center
-	.macro npc_shift_center signedbyte1 signedbyte2 signedbyte3
+	.macro npc_shift_center, signedbyte1, signedbyte2, signedbyte3
 	.byte npc_shift_center_cmd
 	.byte signedbyte1
 	.byte signedbyte2
@@ -138,7 +138,7 @@
 // 0x0f byte1
 // set npc palette index
 // byte1 - value to set npc's palette index to
-	.macro npc_set_npc_palette_index byte1
+	.macro npc_set_npc_palette_index, byte1
 	.byte npc_set_npc_palette_index_cmd
 	.byte byte1
 	.endmacro
@@ -147,7 +147,7 @@
 // 0x10 byte1
 // wait a given number of frames for this npc's script
 // byte1 - number of frames to wait
-	.macro npc_pause byte1
+	.macro npc_pause, byte1
 	.byte npc_pause_cmd
 	.byte byte1
 	.endmacro
@@ -173,7 +173,7 @@
 
 // byte1 - hop param base
 // byte2 - hop param delta
-	.macro npc_init_hop byte1 byte2
+	.macro npc_init_hop, byte1, byte2
 	.byte npc_init_hop_cmd
 	.byte byte1
 	.byte byte2
@@ -199,7 +199,7 @@
 // hword1 - x coordinate
 // hword3 - y coordinate
 // hword5 - z coordinate
-	.macro npc_set_coords hword1 hword3 hword5
+	.macro npc_set_coords, hword1, hword3, hword5
 	.byte npc_set_coords_cmd
 	.hword hword1
 	.hword hword3
@@ -212,7 +212,7 @@
 // byte1 - direction to move npc in
 // byte2 - speed of movement
 // byte3 - distance of movement
-	.macro npc_move_in_direction byte1 byte2 byte3
+	.macro npc_move_in_direction, byte1, byte2, byte3
 	.byte byte1
 	.byte byte2
 	.byte byte3
@@ -223,7 +223,7 @@
 // 0x16 byte1
 // set npc animation
 // byte1 - animation to set
-	.macro npc_set_animation byte1
+	.macro npc_set_animation, byte1
 	.byte npc_set_animation_cmd
 	.byte byte1
 	.endmacro
@@ -235,7 +235,7 @@
 // e.g. Yuichiro and Generic SciLab NPC share the same sprite, but have certain
 // OAM pieces hidden and use a different palette index
 // byte1 - new sprite id of NPC
-	.macro npc_set_sprite byte1
+	.macro npc_set_sprite, byte1
 	.byte npc_set_sprite_cmd
 	.byte byte1
 	.endmacro
@@ -244,7 +244,7 @@
 // 0x18 byte1
 // set text script index
 // byte1 - new text script index of NPC
-	.macro npc_set_text_script_index byte1
+	.macro npc_set_text_script_index, byte1
 	.byte npc_set_text_script_index_cmd
 	.byte byte1
 	.endmacro
@@ -279,7 +279,7 @@
 // but have overlapping OAMs which can be removed to
 // show a different resulting sprite
 // word1 - bitfield of OAM pieces indicating which OAM pieces to show and hide
-	.macro npc_write_hidden_oam_pieces word1
+	.macro npc_write_hidden_oam_pieces, word1
 	.byte npc_write_hidden_oam_pieces_cmd
 	.word word1
 	.endmacro
@@ -289,7 +289,7 @@
 // set a single individual hidden OAM piece for the current NPC
 // this command can only set one bit for the hidden OAM piece bitfield
 // byte1 - the OAM piece to hide
-	.macro npc_set_individual_hidden_oam_piece byte1
+	.macro npc_set_individual_hidden_oam_piece, byte1
 	.byte npc_set_individual_hidden_oam_piece_cmd
 	.byte byte1
 	.endmacro
@@ -299,7 +299,7 @@
 // clear a single individual hidden OAM piece for the current NPC
 // this command can only clear one bit for the hidden OAM piece bitfield
 // byte1 - the OAM piece to hide
-	.macro npc_clear_individual_hidden_oam_piece byte1
+	.macro npc_clear_individual_hidden_oam_piece, byte1
 	.byte npc_clear_individual_hidden_oam_piece_cmd
 	.byte byte1
 	.endmacro
@@ -353,7 +353,7 @@
 // set the current npc's sprite to a sprite from any sprite category
 // byte1 - sprite id
 // byte2 - sprite category
-	.macro npc_set_sprite_with_category byte1 byte2
+	.macro npc_set_sprite_with_category, byte1, byte2
 	.byte npc_set_sprite_with_category_cmd
 	.byte byte1
 	.byte byte2
@@ -381,7 +381,7 @@
 // 0x28 hword1
 // play sound effect
 // hword1 - sound effect to play
-	.macro npc_play_sound hword1
+	.macro npc_play_sound, hword1
 	.byte npc_play_sound_cmd
 	.hword hword1
 	.endmacro
@@ -396,7 +396,7 @@
 // - sets mystery data coordinates
 // - sets collision radius to 4, center offset x to 2, and center offset y to -2
 // hword1 - mystery data ID
-	.macro npc_init_mystery_data hword1
+	.macro npc_init_mystery_data, hword1
 	.byte npc_init_mystery_data_cmd
 	.hword hword1
 	.endmacro
@@ -406,7 +406,7 @@
 // wait for the current npc's animation to equal the specified frame
 // if bit 7 or bit 6 of byte1 is set, test for the specified bits instead
 // byte1 - frame of the current npc's animation to wait for
-	.macro npc_wait_anim_frame byte1
+	.macro npc_wait_anim_frame, byte1
 	.byte npc_wait_anim_frame_cmd
 	.byte byte1
 	.endmacro
@@ -415,7 +415,7 @@
 // 0x2b hword1
 // set current npc's color shader (mixes with current palette)
 // hword1 - new color shader as 15bit RGB
-	.macro npc_set_color_shader hword1
+	.macro npc_set_color_shader, hword1
 	.byte npc_set_color_shader_cmd
 	.hword hword1
 	.endmacro
@@ -429,7 +429,7 @@
 // if byte1 + byte2 == 0, then remove the mosaic effect, if there is one
 // byte1 - mosaic width
 // byte2 - mosaic height
-	.macro npc_set_mosaic byte1 byte2
+	.macro npc_set_mosaic, byte1, byte2
 	.byte npc_set_mosaic_cmd
 	.byte byte1
 	.byte byte2
@@ -440,7 +440,7 @@
 // set npc animation and force it to update
 // so that it updates even if the current animation is the same
 // byte1 - animation to set
-	.macro npc_set_animation_force_update byte1
+	.macro npc_set_animation_force_update, byte1
 	.byte npc_set_animation_force_update_cmd
 	.byte byte1
 	.endmacro
@@ -454,7 +454,7 @@
 // byte1 - horizontal compress value
 // byte2 - vertical compress value
 // byte3 - rotation value
-	.macro npc_set_transform byte1 byte2 byte3
+	.macro npc_set_transform, byte1, byte2, byte3
 	.byte npc_set_transform_cmd
 	.byte byte1
 	.byte byte2
@@ -473,7 +473,7 @@
 // set the alpha for the current npc's sprite
 // but doesn't actually work (inherent to sprite_setAlpha_8002c7a)
 // byte1 - alpha to set (range 0-15). if byte1 is zero, then disable alpha
-	.macro npc_set_alpha byte1
+	.macro npc_set_alpha, byte1
 	.byte npc_set_alpha_cmd
 	.byte byte1
 	.endmacro
@@ -483,7 +483,7 @@
 // run a secondary NPC script
 // called separately from the primary NPC script
 // word1 - script to run
-	.macro npc_run_secondary_script word1
+	.macro npc_run_secondary_script, word1
 	.byte npc_run_secondary_script_cmd
 	.word word1
 	.endmacro
@@ -492,7 +492,7 @@
 // 0x33 byte1
 // wait a given number of frames for the current npc's secondary script
 // byte1 - number of frames to wait
-	.macro npc_pause_secondary_script byte1
+	.macro npc_pause_secondary_script, byte1
 	.byte npc_pause_secondary_script_cmd
 	.byte byte1
 	.endmacro
@@ -509,7 +509,7 @@
 // initialize a native callback for the current npc
 // also writes to the link register field (of the current npc)
 // word1 - native function to set as callback
-	.macro npc_init_native_callback word1
+	.macro npc_init_native_callback, word1
 	.byte npc_init_native_callback_cmd
 	.word word1
 	.endmacro
@@ -518,7 +518,7 @@
 // 0x36 destination1
 // set the npc link register, and jump to another script
 // destination1 - script to jump to
-	.macro npc_jump_with_link destination1
+	.macro npc_jump_with_link, destination1
 	.byte npc_jump_with_link_cmd
 	.word destination1
 	.endmacro
@@ -532,7 +532,7 @@
 // byte3 - third param for native callback
 // byte4 - fourth param for native callback
 // word5 - native function to set as callback
-	.macro npc_init_native_callback_with_args byte1 byte2 byte3 byte4 word5
+	.macro npc_init_native_callback_with_args, byte1, byte2, byte3, byte4, word5
 	.byte npc_init_native_callback_with_args_cmd
 	.byte byte1
 	.byte byte2
@@ -548,7 +548,7 @@
 // byte2 - speed of movement
 // byte3 - amount of movement iterations to do (8 pixels each)
 // destination4 - movement handler to call
-	.macro npc_init_movement byte1 byte2 byte3 destination4
+	.macro npc_init_movement, byte1, byte2, byte3, destination4
 	.byte npc_init_movement_cmd
 	.byte byte1
 	.byte byte2
@@ -565,7 +565,7 @@
 // 0x2 - turn 90 degrees
 // 0x4 - turn 180 degrees
 // 0x6 - turn 270 degrees
-	.macro npc_change_movement_direction byte1
+	.macro npc_change_movement_direction, byte1
 	.byte npc_change_movement_direction_cmd
 	.byte byte1
 	.endmacro
@@ -583,7 +583,7 @@
 // byte1 - lower bound for progress byte
 // byte2 - upper bound for progress byte
 // destination3 - script to jump to
-	.macro npc_jump_if_progress_in_range byte1 byte2 destination3
+	.macro npc_jump_if_progress_in_range, byte1, byte2, destination3
 	.byte npc_jump_if_progress_in_range_cmd
 	.byte byte1
 	.byte byte2
@@ -595,7 +595,7 @@
 // write a value to a cutscene variable
 // byte1 - cutscene variable to write to
 // byte2 - value to write to cutscene variable
-	.macro npc_write_cutscene_var byte1 byte2
+	.macro npc_write_cutscene_var, byte1, byte2
 	.byte npc_write_cutscene_var_cmd
 	.byte byte1
 	.byte byte2
@@ -607,7 +607,7 @@
 // byte1 - cutscene variable to compare
 // byte2 - value to compare with the cutscene variable
 // destination3 - script to jump to
-	.macro npc_jump_if_cutscene_var_equals byte1 byte2 destination3
+	.macro npc_jump_if_cutscene_var_equals, byte1, byte2, destination3
 	.byte npc_jump_if_cutscene_var_equals_cmd
 	.byte byte1
 	.byte byte2
@@ -620,7 +620,7 @@
 // byte1 - cutscene variable to compare
 // byte2 - value to compare with the cutscene variable
 // destination3 - script to jump to
-	.macro npc_jump_if_cutscene_var_not_equal byte1 byte2 destination3
+	.macro npc_jump_if_cutscene_var_not_equal, byte1, byte2, destination3
 	.byte npc_jump_if_cutscene_var_not_equal_cmd
 	.byte byte1
 	.byte byte2
@@ -632,7 +632,7 @@
 // wait for a cutscene variable to equal a given value
 // byte1 - cutscene variable to compare
 // byte2 - value to compare with the cutscene variable
-	.macro npc_wait_cutscene_var byte1 byte2
+	.macro npc_wait_cutscene_var, byte1, byte2
 	.byte npc_wait_cutscene_var_cmd
 	.byte byte1
 	.byte byte2
@@ -659,7 +659,7 @@
 // set text script pointer and index for the current npc
 // byte1 - new text script index
 // word2 - new text script pointer
-	.macro npc_set_text_script_index_and_ptr byte1 word2
+	.macro npc_set_text_script_index_and_ptr, byte1, word2
 	.byte npc_set_text_script_index_and_ptr_cmd
 	.byte byte1
 	.word word2
@@ -669,7 +669,7 @@
 // 0x45 hword1
 // wait for the npc (being a mystery data) to be taken
 // hword1 - mystery data id
-	.macro npc_wait_mystery_data_taken hword1
+	.macro npc_wait_mystery_data_taken, hword1
 	.byte npc_wait_mystery_data_taken_cmd
 	.hword hword1
 	.endmacro
@@ -678,7 +678,7 @@
 // 0x46 byte1
 // if byte1 == 0, turn on obj window mode for the current npc's sprite
 // otherwise, disable object window mode
-	.macro npc_set_obj_window_mode byte1
+	.macro npc_set_obj_window_mode, byte1
 	.byte npc_set_obj_window_mode_cmd
 	.byte byte1
 	.endmacro
@@ -687,7 +687,7 @@
 // 0x47 hword1
 // play music
 // hword1 - music to play
-	.macro npc_play_music hword1
+	.macro npc_play_music, hword1
 	.byte npc_play_music_cmd
 	.hword hword1
 	.endmacro
@@ -714,7 +714,7 @@
 // do a camera shake effect
 // byte1 - shake type
 // hword2 - shake timer
-	.macro npc_do_camera_shake byte1 hword2
+	.macro npc_do_camera_shake, byte1, hword2
 	.byte npc_do_camera_shake_cmd
 	.byte byte1
 	.hword hword2
@@ -724,7 +724,7 @@
 // 0x4b byte1
 // jump if the current npc's animation does not equal the given animation
 // byte1 - animation to compare the current npc's animation with
-	.macro npc_jump_if_anim_not_equal byte1
+	.macro npc_jump_if_anim_not_equal, byte1
 	.byte npc_jump_if_anim_not_equal_cmd
 	.byte byte1
 	.endmacro
@@ -733,7 +733,7 @@
 // 0x4c byte1
 // set text script pointer to a hardcoded buffer and index to the given value for the current npc
 // byte1 - new text script index
-	.macro npc_set_text_script_index_and_ptr_to_decomp_buffer byte1
+	.macro npc_set_text_script_index_and_ptr_to_decomp_buffer, byte1
 	.byte npc_set_text_script_index_and_ptr_to_decomp_buffer_cmd
 	.byte byte1
 	.endmacro
@@ -782,7 +782,7 @@
 // 02 - down left
 // 03 - down right
 // byte4 - velocity of leap, in whole pixels
-	.macro npc_init_leap byte1 byte2 byte3 byte4
+	.macro npc_init_leap, byte1, byte2, byte3, byte4
 	.byte npc_init_leap_cmd
 	.byte byte1
 	.byte byte2
@@ -797,7 +797,7 @@
 // byte1 - number of frames to wait
 // byte2 - direction (0 = upwards, 1 = downwards)
 // byte3 - velocity of vertical movement
-	.macro npc_init_vertical_movement byte1 byte2 byte3
+	.macro npc_init_vertical_movement, byte1, byte2, byte3
 	.byte npc_init_vertical_movement_cmd
 	.byte byte1
 	.byte byte2
@@ -827,7 +827,7 @@
 // stop if byte1 is zero or less
 // z += byte1
 // end loop
-	.macro npc_init_diagonal_leap byte1 byte2 byte3 byte4
+	.macro npc_init_diagonal_leap, byte1, byte2, byte3, byte4
 	.byte npc_init_diagonal_leap_cmd
 	.byte byte1
 	.byte byte2
@@ -841,7 +841,7 @@
 // the npc's text script index and coordinates are set based on the input event flag
 // and the text script ptr is set to the text archive for the groundman minigame
 // hword1 - event flag of prog
-	.macro npc_init_groundman_minigame_prog hword1
+	.macro npc_init_groundman_minigame_prog, hword1
 	.byte npc_init_groundman_minigame_prog_cmd
 	.hword hword1
 	.endmacro
@@ -858,7 +858,7 @@
 // 0x53 destination1
 // jump if the screen is fading
 // destination1 - script to jump to
-	.macro npc_jump_if_screen_fade_active destination1
+	.macro npc_jump_if_screen_fade_active, destination1
 	.byte npc_jump_if_screen_fade_active_cmd
 	.word destination1
 	.endmacro

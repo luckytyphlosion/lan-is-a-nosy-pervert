@@ -80,7 +80,7 @@
 // byte1 - number of flags to test
 // hword2 - starting flag to test
 // destination4 - script to jump to
-	.macro ms_jump_if_flag_range_clear byte1, hword2, destination4
+	.macro ms_jump_if_flag_range_clear, byte1, hword2, destination4
 	.byte ms_jump_if_flag_range_clear_cmd
 	.byte byte1
 	.hword hword2
@@ -97,7 +97,7 @@
 // word2 - pointer to read from
 // destination6 - script to jump to
 // byte10 - value to compare [word2] with
-	.macro ms_jump_if_byte_equals, word2 destination6 byte10
+	.macro ms_jump_if_byte_equals, word2, destination6, byte10
 	.byte ms_jump_if_mem_equals_cmd
 	.byte ms_jump_if_byte_equals_subcmd
 	.word word2
@@ -111,7 +111,7 @@
 // word2 - pointer to read from
 // destination6 - script to jump to
 // hword10 - value to compare [word2] with
-	.macro ms_jump_if_hword_equals, word2 destination6 hword10
+	.macro ms_jump_if_hword_equals, word2, destination6, hword10
 	.byte ms_jump_if_mem_equals_cmd
 	.byte ms_jump_if_hword_equals_subcmd
 	.word word2
@@ -125,7 +125,7 @@
 // word2 - pointer to read from
 // destination6 - script to jump to
 // word10 - value to compare [word2] with
-	.macro ms_jump_if_word_equals_subcmd, word2 destination6 word10
+	.macro ms_jump_if_word_equals_subcmd, word2, destination6, word10
 	.byte ms_jump_if_mem_equals_cmd
 	.byte ms_jump_if_word_equals_subcmd
 	.word word2
@@ -142,7 +142,7 @@
 // byte2 - lower bound of key item range, inclusive
 // byte3 - upper bound of key item range, inclusive
 // destination4 - script to jump to
-	.macro ms_jump_if_key_item_in_range, byte1 byte2 byte3 destination4
+	.macro ms_jump_if_key_item_in_range, byte1, byte2, byte3, destination4
 	.byte ms_jump_if_key_item_in_range_cmd
 	.byte byte1
 	.byte byte2
@@ -159,7 +159,7 @@
 // byte4 - lower bound of chip count, inclusive
 // byte5 - upper bound of chip count, inclusive
 // destination6 - script to jump to
-	.macro ms_jump_if_chip_count_in_range, hword1 byte3 byte4 byte5 destination6
+	.macro ms_jump_if_chip_count_in_range, hword1, byte3, byte4, byte5, destination6
 	.byte ms_jump_if_chip_count_in_range_cmd
 	.hword hword1
 	.byte byte3
@@ -173,7 +173,7 @@
 // jump if battle result equals byte1
 // byte1 - value to compare battle result with (0=won, 1=lost, 2=tie, 3=escaped)
 // destination2 - script to jump to
-	.macro ms_jump_if_battle_result_equals, byte1 destination2
+	.macro ms_jump_if_battle_result_equals, byte1, destination2
 	.byte ms_jump_if_battle_result_equals_cmd
 	.byte byte1
 	.word destination2
@@ -185,7 +185,7 @@
 // jump if battle result doesn't equal byte1
 // byte1 - value to compare battle result with (0=won, 1=lost, 2=tie, 3=escaped)
 // destination2 - script to jump to
-	.macro ms_jump_if_battle_result_not_equal, byte1 destination2
+	.macro ms_jump_if_battle_result_not_equal, byte1, destination2
 	.byte ms_jump_if_battle_result_not_equal_cmd
 	.byte byte1
 	.word destination2
@@ -199,7 +199,7 @@
 // byte1 - byte to compare return value of checkCoordinateTrigger_8031a7a
 // signedbyte2 - signed offset to overworld player object coordinates
 // destination3 - script to jump to
-	.macro ms_coordinate_trigger_equals_cmd_8035afa, byte1 signedbyte2 destination3
+	.macro ms_coordinate_trigger_equals_cmd_8035afa, byte1, signedbyte2, destination3
 	.byte ms_coordinate_trigger_equals_cmd_8035afa_cmd
 	.byte byte1
 	.byte signedbyte2
@@ -214,7 +214,7 @@
 // byte1 - byte to compare return value of checkCoordinateTrigger_8031a7a
 // signedbyte2 - signed offset to overworld player object coordinates
 // destination3 - script to jump to
-	.macro ms_coordinate_trigger_not_equal_cmd_8035b44, byte1 signedbyte2 destination3
+	.macro ms_coordinate_trigger_not_equal_cmd_8035b44, byte1, signedbyte2, destination3
 	.byte ms_coordinate_trigger_not_equal_cmd_8035b44_cmd
 	.byte byte1
 	.byte signedbyte2
@@ -227,7 +227,7 @@
 // the coord interaction value is set when the player presses A in the overworld and is facing coordinates with a defined interaction value
 // byte1 - byte to compare the coord interaction value with
 // destination2 - script to jump to
-	.macro ms_jump_if_coord_interaction_value_equals, byte1 destination2
+	.macro ms_jump_if_coord_interaction_value_equals, byte1, destination2
 	.byte ms_jump_if_coord_interaction_value_equals_cmd
 	.byte byte1
 	.word destination2
@@ -239,7 +239,7 @@
 // the coord interaction value is set when the player presses A in the overworld and is facing coordinates with a defined interaction value
 // byte1 - byte to compare the coord interaction value with
 // destination2 - script to jump to
-	.macro ms_jump_if_coord_interaction_value_not_equal, byte1 destination2
+	.macro ms_jump_if_coord_interaction_value_not_equal, byte1, destination2
 	.byte ms_jump_if_coord_interaction_value_not_equal_cmd
 	.byte byte1
 	.word destination2
@@ -251,7 +251,7 @@
 // jump if the player's current navi equals byte1
 // byte1 - navi to compare the current navi with
 // destination2 - script to jump to
-	.macro ms_jump_if_current_navi_equals, byte1 destination2
+	.macro ms_jump_if_current_navi_equals, byte1, destination2
 	.byte ms_jump_if_current_navi_equals_cmd
 	.byte byte1
 	.word destination2
@@ -263,7 +263,7 @@
 // jump if the player's current navi doesn't equal byte1
 // byte1 - navi to compare the current navi with
 // destination2 - script to jump to
-	.macro ms_jump_if_current_navi_not_equal, byte1 destination2
+	.macro ms_jump_if_current_navi_not_equal, byte1, destination2
 	.byte ms_jump_if_current_navi_not_equal_cmd
 	.byte byte1
 	.word destination2
@@ -274,7 +274,7 @@
 // jump if the the player's z coordinate equals signedhword1
 // signedhword1 - z coordinate to compare the player's z coordinate with
 // destination2 - script to jump to
-	.macro ms_jump_if_player_z_equals, signedhword1 destination2
+	.macro ms_jump_if_player_z_equals, signedhword1, destination2
 	.byte ms_jump_if_player_z_equals_cmd
 	.hword signedhword1
 	.word destination2
@@ -285,7 +285,7 @@
 // jump if the the player's z coordinate does not equal signedhword1
 // signedhword1 - z coordinate to compare the player's z coordinate with
 // destination2 - script to jump to
-	.macro ms_jump_if_player_z_not_equal, signedhword1 destination2
+	.macro ms_jump_if_player_z_not_equal, signedhword1, destination2
 	.byte ms_jump_if_player_z_not_equal_cmd
 	.hword signedhword1
 	.word destination2
@@ -296,7 +296,7 @@
 // jump if hword1 equals eGameState_Unk_44
 // hword1 - value to compare eGameState_Unk_44 with
 // destination2 - script to jump to
-	.macro ms_jump_if_game_state_44_equals, hword1 destination2
+	.macro ms_jump_if_game_state_44_equals, hword1, destination2
 	.byte ms_jump_if_game_state_44_equals_cmd
 	.hword hword1
 	.word destination2
@@ -307,7 +307,7 @@
 // jump if hword1 doesn't equal eGameState_Unk_44
 // hword1 - value to compare eGameState_Unk_44 with
 // destination2 - script to jump to
-	.macro ms_jump_if_game_state_44_not_equal, hword1 destination2
+	.macro ms_jump_if_game_state_44_not_equal, hword1, destination2
 	.byte ms_jump_if_game_state_44_not_equal_cmd
 	.hword hword1
 	.word destination2
@@ -343,7 +343,7 @@
 // destination1 - script to jump to if [eNaviStats + 0x4c] is not 1 or 2
 // destination5 - script to jump to if [eNaviStats + 0x4c] is 1
 // destination9 - script to jump to if [eNaviStats + 0x4c] is 2
-	.macro ms_switch_case_from_navi_stats_4c, destination1 destination5 destination9
+	.macro ms_switch_case_from_navi_stats_4c, destination1, destination5, destination9
 	.byte ms_switch_case_from_navi_stats_4c_cmd
 	.word destination1
 	.word destination5
@@ -359,7 +359,7 @@
 //  else returns 2
 // byte1 - value to compare the return value of sub_800B734 with
 // destination2 - script to jump to
-	.macro ms_cmd_8035cd6, byte1 destination2
+	.macro ms_cmd_8035cd6, byte1, destination2
 	.byte ms_cmd_8035cd6_cmd
 	.byte byte1
 	.word destination2
@@ -374,7 +374,7 @@
 //  else returns 2
 // byte1 - value to compare the return value of sub_800B734 with
 // destination2 - script to jump to
-	.macro ms_cmd_8035cf8, byte1 destination2
+	.macro ms_cmd_8035cf8, byte1, destination2
 	.byte ms_cmd_8035cf8_cmd
 	.byte byte1
 	.word destination2
@@ -427,7 +427,7 @@
 // sets screen fade params for the screen fade when entering a map
 // byte1 - argument 1 for enter map screen fade
 // byte2 - argument 2 for enter map screen fade
-	.macro ms_set_enter_map_screen_fade, byte1 byte2
+	.macro ms_set_enter_map_screen_fade, byte1, byte2
 	.byte ms_set_enter_map_screen_fade_cmd
 	.byte byte1
 	.byte byte2
@@ -439,7 +439,7 @@
 // set event flag
 // byte1 - memory param
 // hword2 or mem - event flag to set
-	.macro ms_set_event_flag, byte1 hword2
+	.macro ms_set_event_flag, byte1, hword2
 	.byte ms_set_event_flag_cmd
 	.byte byte1
 	.hword hword2
@@ -451,7 +451,7 @@
 // clear event flag
 // byte1 - memory param
 // hword2 or mem - event flag to clear
-	.macro ms_clear_event_flag, byte1 hword2
+	.macro ms_clear_event_flag, byte1, hword2
 	.byte ms_clear_event_flag_cmd
 	.byte byte1
 	.hword hword2
@@ -464,7 +464,7 @@
 // event flags set are in the range [hword2, hword2+byte1) (interval notation)
 // byte1 - number of event flags to set
 // hword2 - starting event flag
-	.macro ms_set_event_flag_range, byte1 hword2
+	.macro ms_set_event_flag_range, byte1, hword2
 	.byte ms_set_event_flag_range_cmd
 	.byte byte1
 	.hword hword2
@@ -477,7 +477,7 @@
 // event flags cleared are in the range [hword2, hword2+byte1) (interval notation)
 // byte1 - number of event flags to clear
 // hword2 - starting event flag
-	.macro ms_clear_event_flag_range, byte1 hword2
+	.macro ms_clear_event_flag_range, byte1, hword2
 	.byte ms_clear_event_flag_range_cmd
 	.byte byte1
 	.hword hword2
@@ -508,7 +508,7 @@
 // call the native function word1 with word5 in r0
 // word1 - native function to call
 // word5 - parameter to native function
-	.macro ms_call_native_function, word1 word5
+	.macro ms_call_native_function, word1, word5
 	.byte ms_call_native_function_cmd
 	.word word1
 	.word word5
@@ -519,7 +519,7 @@
 // start a cutscene
 // word1 - cutscene script to start
 // word5 - cutscene parameter
-	.macro ms_start_cutscene, word1 word5
+	.macro ms_start_cutscene, word1, word5
 	.byte ms_start_cutscene_cmd
 	.word word1
 	.word word5
@@ -532,7 +532,7 @@
 // [word1] = byte5
 // word1 - pointer to write to
 // byte5 - value to write
-	.macro ms_write_byte, word1 byte5
+	.macro ms_write_byte, word1, byte5
 	.byte ms_write_byte_cmd
 	.word word1
 	.byte byte5
@@ -545,7 +545,7 @@
 // [word1] = hword5
 // word1 - pointer to write to
 // hword5 - value to write
-	.macro ms_write_hword, word1 hword5
+	.macro ms_write_hword, word1, hword5
 	.byte ms_write_hword_cmd
 	.word word1
 	.hword hword5
@@ -558,7 +558,7 @@
 // [word1] = word5
 // word1 - pointer to write to
 // word5 - value to write
-	.macro ms_write_word, word1 word5
+	.macro ms_write_word, word1, word5
 	.byte ms_write_word_cmd
 	.word word1
 	.word word5
@@ -571,7 +571,7 @@
 // [eGameState + byte1] = byte2
 // byte1 - eGameState field to write to
 // byte2 - value to write
-	.macro ms_write_gamestate_byte, byte1 byte2
+	.macro ms_write_gamestate_byte, byte1, byte2
 	.byte ms_write_gamestate_byte_cmd
 	.byte byte1
 	.byte byte2
@@ -584,7 +584,7 @@
 // [eStruct2001c04 + byte1] = byte2
 // byte1 - eStruct2001c04 field to write to
 // byte2 - value to write
-	.macro ms_write_eStruct2001c04_byte, byte1 byte2
+	.macro ms_write_eStruct2001c04_byte, byte1, byte2
 	.byte ms_write_eStruct2001c04_byte_cmd
 	.byte byte1
 	.byte byte2
@@ -663,7 +663,7 @@
 	enum ms_sound_cmd_80380ea_cmd // 0x32
 // 0x32/0x4f hword1 byte3 byte4
 // call sound_80006A2 with r0=hword1, r1=byte3, r2=byte4
-	.macro ms_sound_cmd_80380ea, hword1 byte3 byte4
+	.macro ms_sound_cmd_80380ea, hword1, byte3, byte4
 	.byte ms_sound_cmd_80380ea_cmd
 	.hword hword1
 	.byte byte3
@@ -674,7 +674,7 @@
 	enum ms_sound_cmd_803810e_cmd // 0x33
 // 0x33/0x50 byte1 byte2
 // call sound_800068A with r0=byte1, r1=byte2 then do [eGameState_BGMusicIndicator] = 0x63
-	.macro ms_sound_cmd_803810e, byte1 byte2
+	.macro ms_sound_cmd_803810e, byte1, byte2
 	.byte ms_sound_cmd_803810e_cmd
 	.byte byte1
 	.byte byte2
@@ -698,7 +698,7 @@
 // byte1 - operation type (0=give, 1=take)
 // byte2 - item to give or take
 // byte3 - quantity of item
-	.macro ms_give_item, byte2 byte3
+	.macro ms_give_item, byte2, byte3
 	.byte ms_give_or_take_item_cmd
 	.byte ms_give_item_subcmd
 	.byte byte2
@@ -711,7 +711,7 @@
 // byte1 - operation type (0=give, 1=take)
 // byte2 - item to give or take
 // byte3 - quantity of item
-	.macro ms_take_item, byte2 byte3
+	.macro ms_take_item, byte2, byte3
 	.byte ms_give_or_take_item_cmd
 	.byte ms_take_item_subcmd
 	.byte byte2
@@ -724,7 +724,7 @@
 // trigger a PET overworld effect
 // byte1 - memory param
 // byte2 or mem - PET overworld effect to trigger
-	.macro ms_do_pet_effect, byte1 byte2
+	.macro ms_do_pet_effect, byte1, byte2
 	.byte ms_do_pet_effect_cmd
 	.byte byte1
 	.byte byte2
@@ -736,7 +736,7 @@
 	enum ms_init_eStruct200a6a0_cmd // 0x38
 // 0x38/0x58 word1 word5 word9
 // call Initialize_eStruct200a6a0 with r0=word1, r1=word5, r2=word9
-	.macro ms_init_eStruct200a6a0, word1 word5 word9
+	.macro ms_init_eStruct200a6a0, word1, word5, word9
 	.byte ms_init_eStruct200a6a0_cmd
 	.word word1
 	.word word5
@@ -849,7 +849,7 @@
 // i.e. [hword1, hword1+byte3) (interval notation)
 // hword1 - starting bbs message flag
 // byte3 - number of bbs messages to add
-	.macro ms_add_bbs_message_range, hword1 byte3
+	.macro ms_add_bbs_message_range, hword1, byte3
 	.byte ms_add_bbs_message_range_cmd
 	.hword hword1
 	.byte byte3
@@ -862,7 +862,7 @@
 // i.e. [hword1, hword1+byte3) (interval notation)
 // hword1 - starting mail flag
 // byte3 - number of mails to add
-	.macro ms_add_mail_range, hword1 byte3
+	.macro ms_add_mail_range, hword1, byte3
 	.byte ms_add_mail_range_cmd
 	.hword hword1
 	.byte byte3
@@ -872,7 +872,7 @@
 	enum ms_cmd_8038346_cmd // 0x43
 // 0x43/0x6c word1 word5
 // call sub_80356F8 with r0=word1 and r1=word5
-	.macro ms_cmd_8038346, word1 word5
+	.macro ms_cmd_8038346, word1, word5
 	.byte ms_cmd_8038346_cmd
 	.word word1
 	.word word5
@@ -885,7 +885,7 @@
 // i.e. [hword1, hword1+byte3) (interval notation)
 // hword1 - starting bbs request flag
 // byte3 - number of bbs requests to add
-	.macro ms_add_request_range, hword1 byte3
+	.macro ms_add_request_range, hword1, byte3
 	.byte ms_add_request_range_cmd
 	.hword hword1
 	.byte byte3

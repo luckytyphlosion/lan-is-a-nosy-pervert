@@ -1,2 +1,11 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# files part of the build
+*.s text eol=lf
+*.inc text eol=lf
+
+# extra files
+*.bat text eol=lf
+*.md text eol=lf
+*.py text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf
+LICENSE text eol=lf
