@@ -1,0 +1,3 @@
+
+	GROUP_ACDC_TOWN equ 0x0
+	MAP_ACDC_TOWN equ 0x0
