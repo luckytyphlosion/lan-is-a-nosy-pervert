@@ -467,8 +467,8 @@
 // byte1 - memory param (base index, memory for byte3 is [eMapScriptState + byte1 + 1])
 // byte2 or mem1 - argument 1 for screen fade
 // byte3 or mem2 - argument 2 for screen fade
-	.macro cs_set_screen_fade
-	.byte cs_set_screen_fade_cmd byte1 byte2 byte3
+	.macro cs_set_screen_fade, byte1, byte2, byte3
+	.byte cs_set_screen_fade_cmd
 	.byte byte1
 	.byte byte2
 	.byte byte3
@@ -700,7 +700,7 @@
 	.macro cs_run_text_script, byte1, byte2
 	.byte cs_run_text_script_cmd
 	.byte byte1
-	.if byte1 != 0xff
+	.if byte1 == 0xff
 	.byte byte2
 	.endif
 	.endmacro

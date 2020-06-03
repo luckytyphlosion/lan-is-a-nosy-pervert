@@ -1,3 +1,5 @@
 tools/armips.exe
+tools/lzss.exe
 *.gba
 *.sna
+temp/
