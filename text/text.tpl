@@ -1,4 +1,4 @@
-@archive 7A3B84
+@archive ChaudConfrontsLan
 @size 1
 
 script 0 mmbn6 {
@@ -18,4 +18,21 @@ script 0 mmbn6 {
 		any = false
 	clearMsg
 	end
+}
+
+@archive AfterLanWins
+@size 1
+
+script 0 mmbn6 {
+  mugshotShow
+    mugshot = Lan
+  msgOpen
+  """
+  (Yes! Now I get to see
+  something...)
+  """
+  keyWait
+    any = false
+  clearMsg
+  end
 }

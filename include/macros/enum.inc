@@ -33,22 +33,36 @@
 //
 //	.definelabel __sum, __enum_inc_amount + __subenum_inc_amount
 
-	.macro enum_start, x, inc_amount
+	.macro fake_enum_start, x, inc_amount
 	.endmacro
 
-	.macro enum, constant, value
+	.macro fake_enum, constant, value
 	.definelabel constant, value
 	.endmacro
 
-	.macro enum_skip, skip_amount
+	.macro fake_enum_skip, skip_amount
 	.endmacro
 
-	.macro subenum_start, x, inc_amount
+	.macro fake_subenum_start, x, inc_amount
 	.endmacro
 
-	.macro subenum, constant, value
+	.macro fake_subenum, constant, value
 	.definelabel constant, value
 	.endmacro
 
-	.macro subenum_skip, skip_amount
+	.macro fake_subenum_skip, skip_amount
 	.endmacro
+
+	// .macro enum_start
+	// .headersize 0
+	// .org 0
+	// .endmacro
+
+	// .macro enum_end
+	// .headersize 0x8000000
+	// .endmacro
+
+	// .macro enum, name
+// name:
+	// .skip 1
+	// .endmacro

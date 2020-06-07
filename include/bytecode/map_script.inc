@@ -1,7 +1,7 @@
 
-	enum_start 0, 1
+	fake_enum_start 0, 1
 
-	enum ms_end_cmd, 0x00 // 0x00
+	fake_enum ms_end_cmd, 0x00 // 0x00
 // 0x00
 // return from script
 	.macro ms_end
@@ -9,7 +9,7 @@
 	.endmacro
 
 // shared command
-	enum ms_jump_cmd, 0x01 // 0x01
+	fake_enum ms_jump_cmd, 0x01 // 0x01
 // 0x01/0x15 destination1
 // jump to another script
 // destination1 - script to jump to
@@ -19,7 +19,7 @@
 	.endmacro
 
 // shared command
-	enum ms_jump_if_progress_in_range_cmd, 0x02 // 0x02
+	fake_enum ms_jump_if_progress_in_range_cmd, 0x02 // 0x02
 // 0x02/0x16 byte1 byte2 destination3
 // jump if byte1 <= progress byte <= byte2
 // byte1 - lower bound for progress byte
@@ -32,7 +32,7 @@
 	.endmacro
 
 // shared command
-	enum ms_jump_if_flag_set_cmd, 0x03 // 0x03
+	fake_enum ms_jump_if_flag_set_cmd, 0x03 // 0x03
 // 0x03/0x17 byte1 hword2 destination4
 // jump if event flag in mem or immediate is set
 // byte1 - memory param
@@ -46,7 +46,7 @@
 	.endmacro
 
 // shared command
-	enum ms_jump_if_flag_range_set_cmd, 0x04 // 0x04
+	fake_enum ms_jump_if_flag_range_set_cmd, 0x04 // 0x04
 // 0x04/0x18 byte1 hword2 destination4
 // jump if (all) event flags in the event flag range are set
 // byte1 - number of flags to test
@@ -60,7 +60,7 @@
 	.endmacro
 
 // shared command
-	enum ms_jump_if_flag_clear_cmd, 0x05 // 0x05
+	fake_enum ms_jump_if_flag_clear_cmd, 0x05 // 0x05
 // 0x05/0x19 byte1 hword2 destination4
 // jump if event flag in mem or immediate is clear
 // byte1 - memory param
@@ -74,7 +74,7 @@
 	.endmacro
 
 // shared command
-	enum ms_jump_if_flag_range_clear_cmd, 0x06 // 0x06
+	fake_enum ms_jump_if_flag_range_clear_cmd, 0x06 // 0x06
 // 0x06/0x1a byte1 hword2 destination4
 // jump if not all event flags in the event flag range are set
 // byte1 - number of flags to test
@@ -88,10 +88,10 @@
 	.endmacro
 
 // shared command
-	enum ms_jump_if_mem_equals_cmd, 0x07 // 0x07
-	subenum_start 0, 1
+	fake_enum ms_jump_if_mem_equals_cmd, 0x07 // 0x07
+	fake_subenum_start 0, 1
 
-	subenum ms_jump_if_byte_equals_subcmd, 0x0 // 0x0
+	fake_subenum ms_jump_if_byte_equals_subcmd, 0x0 // 0x0
 // 0x07/0x1b 0x00 word2 destination6 byte10
 // jump if [word2] == byte10
 // word2 - pointer to read from
@@ -105,7 +105,7 @@
 	.byte byte10
 	.endmacro
 
-	subenum ms_jump_if_hword_equals_subcmd, 0x1 // 0x1
+	fake_subenum ms_jump_if_hword_equals_subcmd, 0x1 // 0x1
 // 0x07/0x1b 0x01 word2 destination6 hword10
 // jump if [word2] == hword10
 // word2 - pointer to read from
@@ -119,7 +119,7 @@
 	.halfword hword10
 	.endmacro
 
-	subenum ms_jump_if_word_equals_subcmd, 0x2 // 0x2
+	fake_subenum ms_jump_if_word_equals_subcmd, 0x2 // 0x2
 // 0x07/0x1b 0x02 word2 destination6 word10
 // jump if [word2] == word10
 // word2 - pointer to read from
@@ -134,7 +134,7 @@
 	.endmacro
 
 // shared command
-	enum ms_jump_if_key_item_in_range_cmd, 0x08 // 0x08
+	fake_enum ms_jump_if_key_item_in_range_cmd, 0x08 // 0x08
 // 0x08/0x1d byte1 byte2 byte3 destination
 // jump if the specified key item is in the given range
 // i.e. byte2 <= CheckKeyItem(byte1) <= byte3
@@ -151,7 +151,7 @@
 	.endmacro
 
 // shared command
-	enum ms_jump_if_chip_count_in_range_cmd, 0x09 // 0x09
+	fake_enum ms_jump_if_chip_count_in_range_cmd, 0x09 // 0x09
 // 0x09/0x1e hword1 byte3 byte4 byte5 destination6
 // jump if the number of the specified chip with optional code is in the given range
 // hword1 - chip to count
@@ -168,7 +168,7 @@
 	.endmacro
 
 // shared command
-	enum ms_jump_if_battle_result_equals_cmd, 0x0a // 0x0a
+	fake_enum ms_jump_if_battle_result_equals_cmd, 0x0a // 0x0a
 // 0x0a/0x1f byte1 destination2
 // jump if battle result equals byte1
 // byte1 - value to compare battle result with (0=won, 1=lost, 2=tie, 3=escaped)
@@ -180,7 +180,7 @@
 	.endmacro
 
 // shared command
-	enum ms_jump_if_battle_result_not_equal_cmd, 0x0b // 0x0b
+	fake_enum ms_jump_if_battle_result_not_equal_cmd, 0x0b // 0x0b
 // 0xb/0x20 byte1 destination2
 // jump if battle result doesn't equal byte1
 // byte1 - value to compare battle result with (0=won, 1=lost, 2=tie, 3=escaped)
@@ -192,7 +192,7 @@
 	.endmacro
 
 // shared command
-	enum ms_coordinate_trigger_equals_cmd_8035afa_cmd, 0x0c // 0x0c
+	fake_enum ms_coordinate_trigger_equals_cmd_8035afa_cmd, 0x0c // 0x0c
 // 0x0c/0x21 byte1 signedbyte2 destination3
 // jump if the return value of the coordinate trigger function (checkCoordinateTrigger_8031a7a) equals byte1
 // checkCoordinateTrigger_8031a7a returns r0, r1. if r0 == 0, r1 is used in comparison
@@ -207,7 +207,7 @@
 	.endmacro
 
 // shared command
-	enum ms_coordinate_trigger_not_equal_cmd_8035b44_cmd, 0x0d // 0x0d
+	fake_enum ms_coordinate_trigger_not_equal_cmd_8035b44_cmd, 0x0d // 0x0d
 // 0x0d/0x22 byte1 signedbyte2 destination3
 // jump if the return value of the coordinate trigger function (checkCoordinateTrigger_8031a7a) doesn't equal byte1
 // checkCoordinateTrigger_8031a7a returns r0, r1. if r0 == 0, r1 is used in comparison
@@ -221,7 +221,7 @@
 	.word destination3
 	.endmacro
 
-	enum ms_jump_if_coord_interaction_value_equals_cmd, 0x0e // 0x0e
+	fake_enum ms_jump_if_coord_interaction_value_equals_cmd, 0x0e // 0x0e
 // 0x0e byte1 destination2
 // jump if the coord interaction value equals byte1
 // the coord interaction value is set when the player presses A in the overworld and is facing coordinates with a defined interaction value
@@ -233,7 +233,7 @@
 	.word destination2
 	.endmacro
 
-	enum ms_jump_if_coord_interaction_value_not_equal_cmd, 0x0f // 0x0f
+	fake_enum ms_jump_if_coord_interaction_value_not_equal_cmd, 0x0f // 0x0f
 // 0x0f byte1 destination2
 // jump if the coord interaction value does not equal byte1
 // the coord interaction value is set when the player presses A in the overworld and is facing coordinates with a defined interaction value
@@ -246,7 +246,7 @@
 	.endmacro
 
 // shared command
-	enum ms_jump_if_current_navi_equals_cmd, 0x10 // 0x10
+	fake_enum ms_jump_if_current_navi_equals_cmd, 0x10 // 0x10
 // 0x10/0x23 byte1 destination2
 // jump if the player's current navi equals byte1
 // byte1 - navi to compare the current navi with
@@ -258,7 +258,7 @@
 	.endmacro
 
 // shared command
-	enum ms_jump_if_current_navi_not_equal_cmd, 0x11 // 0x11
+	fake_enum ms_jump_if_current_navi_not_equal_cmd, 0x11 // 0x11
 // 0x11/0x24 byte1 destination2
 // jump if the player's current navi doesn't equal byte1
 // byte1 - navi to compare the current navi with
@@ -269,7 +269,7 @@
 	.word destination2
 	.endmacro
 
-	enum ms_jump_if_player_z_equals_cmd, 0x12 // 0x12
+	fake_enum ms_jump_if_player_z_equals_cmd, 0x12 // 0x12
 // 0x12 signedhword1 destination2
 // jump if the the player's z coordinate equals signedhword1
 // signedhword1 - z coordinate to compare the player's z coordinate with
@@ -280,7 +280,7 @@
 	.word destination2
 	.endmacro
 
-	enum ms_jump_if_player_z_not_equal_cmd, 0x13 // 0x13
+	fake_enum ms_jump_if_player_z_not_equal_cmd, 0x13 // 0x13
 // 0x13 signedhword1 destination2
 // jump if the the player's z coordinate does not equal signedhword1
 // signedhword1 - z coordinate to compare the player's z coordinate with
@@ -291,7 +291,7 @@
 	.word destination2
 	.endmacro
 
-	enum ms_jump_if_game_state_44_equals_cmd, 0x14 // 0x14
+	fake_enum ms_jump_if_game_state_44_equals_cmd, 0x14 // 0x14
 // 0x14 hword1 destination2
 // jump if hword1 equals eGameState_Unk_44
 // hword1 - value to compare eGameState_Unk_44 with
@@ -302,7 +302,7 @@
 	.word destination2
 	.endmacro
 
-	enum ms_jump_if_game_state_44_not_equal_cmd, 0x15 // 0x15
+	fake_enum ms_jump_if_game_state_44_not_equal_cmd, 0x15 // 0x15
 // 0x15 hword1 destination2
 // jump if hword1 doesn't equal eGameState_Unk_44
 // hword1 - value to compare eGameState_Unk_44 with
@@ -313,10 +313,10 @@
 	.word destination2
 	.endmacro
 
-	enum ms_jump_if_map_group_compare_last_map_group_cmd, 0x16 // 0x16
-	subenum_start 0, 1
+	fake_enum ms_jump_if_map_group_compare_last_map_group_cmd, 0x16 // 0x16
+	fake_subenum_start 0, 1
 
-	subenum ms_jump_if_map_group_not_equal_last_map_group_subcmd, 0x0 // 0x0
+	fake_subenum ms_jump_if_map_group_not_equal_last_map_group_subcmd, 0x0 // 0x0
 // 0x16 0x00 destination2
 // jump if the current map group does not equal the last map group
 // destination2 - script to jump to
@@ -326,7 +326,7 @@
 	.word destination2
 	.endmacro
 
-	subenum ms_jump_if_map_group_equals_last_map_group_subcmd, 0x1 // 0x1
+	fake_subenum ms_jump_if_map_group_equals_last_map_group_subcmd, 0x1 // 0x1
 // 0x16 0x01 destination2
 // jump if the current map group equals the last map group
 // destination2 - script to jump to
@@ -336,7 +336,7 @@
 	.word destination2
 	.endmacro
 
-	enum ms_switch_case_from_navi_stats_4c_cmd, 0x17 // 0x17
+	fake_enum ms_switch_case_from_navi_stats_4c_cmd, 0x17 // 0x17
 // 0x17 destination1 destination5 destination9
 // jumptable, using [eNaviStats + 0x4c] as the base index
 // default is destination1
@@ -350,7 +350,7 @@
 	.word destination9
 	.endmacro
 
-	enum ms_cmd_8035cd6_cmd, 0x18 // 0x18
+	fake_enum ms_cmd_8035cd6_cmd, 0x18 // 0x18
 // 0x18 byte1 destination2
 // jump if byte1 == sub_800B734()
 // sub_800B734 performs a summation on the 12 halfwords at word_2000FA0
@@ -365,7 +365,7 @@
 	.word destination2
 	.endmacro
 
-	enum ms_cmd_8035cf8_cmd, 0x19 // 0x19
+	fake_enum ms_cmd_8035cf8_cmd, 0x19 // 0x19
 // 0x19 byte1 destination2
 // jump if byte1 != sub_800B734()
 // sub_800B734 performs a summation on the 12 halfwords at word_2000FA0
@@ -380,7 +380,7 @@
 	.word destination2
 	.endmacro
 
-	enum ms_jump_if_fade_active_cmd, 0x1a // 0x1a
+	fake_enum ms_jump_if_fade_active_cmd, 0x1a // 0x1a
 // 0x1a destination1
 // jump if the screen is fading
 // destination1 - script to jump to
@@ -389,7 +389,7 @@
 	.word destination1
 	.endmacro
 
-	enum ms_jump_if_eStruct200a6a0_initialized_cmd, 0x1b // 0x1b
+	fake_enum ms_jump_if_eStruct200a6a0_initialized_cmd, 0x1b // 0x1b
 // 0x1b destination1
 // jump if [eStruct200a6a0] != 0
 // destination1 - script to jump to
@@ -398,7 +398,7 @@
 	.word destination1
 	.endmacro
 
-	enum ms_jump_if_in_pet_menu_cmd, 0x1c // 0x1c
+	fake_enum ms_jump_if_in_pet_menu_cmd, 0x1c // 0x1c
 // 0x1c destination1
 // jump if the PET menu or a submenu is open (ePETMenuData+5)
 // destination1 - script to jump to
@@ -408,7 +408,7 @@
 	.endmacro
 
 // shared command
-	enum ms_set_screen_fade_cmd, 0x1d // 0x1d
+	fake_enum ms_set_screen_fade_cmd, 0x1d // 0x1d
 // 0x1d/0x27 byte1 byte2 byte3
 // set screen fade
 // byte1 - memory param (base index, memory for byte3 is [eMapScriptState + byte1 + 1])
@@ -422,7 +422,7 @@
 	.endmacro
 
 // shared command
-	enum ms_set_enter_map_screen_fade_cmd, 0x1e // 0x1e
+	fake_enum ms_set_enter_map_screen_fade_cmd, 0x1e // 0x1e
 // 0x1e/0x28 byte1 byte2
 // sets screen fade params for the screen fade when entering a map
 // byte1 - argument 1 for enter map screen fade
@@ -434,7 +434,7 @@
 	.endmacro
 
 // shared command
-	enum ms_set_event_flag_cmd, 0x1f // 0x1f
+	fake_enum ms_set_event_flag_cmd, 0x1f // 0x1f
 // 0x1f/0x29 byte1 hword2
 // set event flag
 // byte1 - memory param
@@ -446,7 +446,7 @@
 	.endmacro
 
 // shared command
-	enum ms_clear_event_flag_cmd, 0x20 // 0x20
+	fake_enum ms_clear_event_flag_cmd, 0x20 // 0x20
 // 0x20/0x2a byte1 hword2
 // clear event flag
 // byte1 - memory param
@@ -458,7 +458,7 @@
 	.endmacro
 
 // shared command
-	enum ms_set_event_flag_range_cmd, 0x21 // 0x21
+	fake_enum ms_set_event_flag_range_cmd, 0x21 // 0x21
 // 0x21/0x2b byte1 hword2
 // set byte1 event flags starting at the event flag hword2
 // event flags set are in the range [hword2, hword2+byte1) (interval notation)
@@ -471,7 +471,7 @@
 	.endmacro
 
 // shared command
-	enum ms_clear_event_flag_range_cmd, 0x22 // 0x22
+	fake_enum ms_clear_event_flag_range_cmd, 0x22 // 0x22
 // 0x22/0x2c byte1 hword2
 // clear byte1 event flags starting at the event flag hword2
 // event flags cleared are in the range [hword2, hword2+byte1) (interval notation)
@@ -484,7 +484,7 @@
 	.endmacro
 
 // shared command
-	enum ms_set_event_flag_list_cmd, 0x23 // 0x23
+	fake_enum ms_set_event_flag_list_cmd, 0x23 // 0x23
 // 0x23/0x2d word1
 // set the list of event flags at word1, terminated by (presumably) -1
 // word1 - list of event flags to set, terminated by a negative number (presumably -1)
@@ -494,7 +494,7 @@
 	.endmacro
 
 // shared command
-	enum ms_clear_event_flag_list_cmd, 0x24 // 0x24
+	fake_enum ms_clear_event_flag_list_cmd, 0x24 // 0x24
 // 0x24/0x2e word1
 // clear the list of event flags at word1, terminated by (presumably) -1
 // word1 - list of event flags to clear, terminated by a negative number (presumably -1)
@@ -503,7 +503,7 @@
 	.word word1
 	.endmacro
 
-	enum ms_call_native_function_cmd, 0x25 // 0x25
+	fake_enum ms_call_native_function_cmd, 0x25 // 0x25
 // 0x25 word1 word5
 // call the native function word1 with word5 in r0
 // word1 - native function to call
@@ -514,7 +514,7 @@
 	.word word5
 	.endmacro
 
-	enum ms_start_cutscene_cmd, 0x26 // 0x26
+	fake_enum ms_start_cutscene_cmd, 0x26 // 0x26
 // 0x26 word1 word5
 // start a cutscene
 // word1 - cutscene script to start
@@ -526,7 +526,7 @@
 	.endmacro
 
 // shared command
-	enum ms_write_byte_cmd, 0x27 // 0x27
+	fake_enum ms_write_byte_cmd, 0x27 // 0x27
 // 0x27/0x2f word1 byte5
 // write byte5 to the memory at word1
 // [word1] = byte5
@@ -539,7 +539,7 @@
 	.endmacro
 
 // shared command
-	enum ms_write_hword_cmd, 0x28 // 0x28
+	fake_enum ms_write_hword_cmd, 0x28 // 0x28
 // 0x28/0x30 word1 hword5
 // write hword5 to the memory at word1
 // [word1] = hword5
@@ -552,7 +552,7 @@
 	.endmacro
 
 // shared command
-	enum ms_write_word_cmd, 0x29 // 0x29
+	fake_enum ms_write_word_cmd, 0x29 // 0x29
 // 0x29/0x31 word1 word5
 // write word5 to the memory at word1
 // [word1] = word5
@@ -565,7 +565,7 @@
 	.endmacro
 
 // shared command
-	enum ms_write_gamestate_byte_cmd, 0x2a // 0x2a
+	fake_enum ms_write_gamestate_byte_cmd, 0x2a // 0x2a
 // 0x2a/0x32 byte1 byte2
 // write byte2 to the eGameState field byte1
 // [eGameState + byte1] = byte2
@@ -578,7 +578,7 @@
 	.endmacro
 
 // shared command
-	enum ms_write_eStruct2001c04_byte_cmd, 0x2b // 0x2b
+	fake_enum ms_write_eStruct2001c04_byte_cmd, 0x2b // 0x2b
 // 0x2b/0x33 byte1 byte2
 // write byte2 to the eStruct2001c04 field byte1
 // [eStruct2001c04 + byte1] = byte2
@@ -591,7 +591,7 @@
 	.endmacro
 
 // shared command
-	enum ms_load_gfx_anim_cmd, 0x2c // 0x2c
+	fake_enum ms_load_gfx_anim_cmd, 0x2c // 0x2c
 // 0x2c/0x36 word1
 // load a gfx anim
 // e.g. the animated tiles on the background of the net
@@ -604,7 +604,7 @@
 	.endmacro
 
 // shared command
-	enum ms_load_gfx_anims_cmd, 0x2d // 0x2d
+	fake_enum ms_load_gfx_anims_cmd, 0x2d // 0x2d
 // 0x2d/0x37 word1
 // do LoadGFXAnims(r0=word1)
 // r0 is a list of pointers for LoadGFXAnim, terminated by negative
@@ -614,7 +614,7 @@
 	.endmacro
 
 // shared command
-	enum ms_load_map_gfx_anims_bg_anim_cmd, 0x2e // 0x2e
+	fake_enum ms_load_map_gfx_anims_bg_anim_cmd, 0x2e // 0x2e
 // 0x2e/0x38
 // call LoadGFXAnimsForMapGroup, then LoadBGAnimForMapGroup
 // uses map group/number as args
@@ -623,7 +623,7 @@
 	.endmacro
 
 // shared command
-	enum ms_terminate_one_or_all_gfx_anims_cmd, 0x2f // 0x2f
+	fake_enum ms_terminate_one_or_all_gfx_anims_cmd, 0x2f // 0x2f
 // 0x2f/0x39 byte1
 // terminate the given gfx anim
 // byte1 - index of gfx anim to terminate
@@ -640,7 +640,7 @@
 	.endmacro
 
 // shared command
-	enum ms_play_sound_cmd, 0x30 // 0x30
+	fake_enum ms_play_sound_cmd, 0x30 // 0x30
 // 0x30/0x4d hword1
 // play sound
 // hword1 - sound to play
@@ -650,7 +650,7 @@
 	.endmacro
 
 // shared command
-	enum ms_play_music_cmd, 0x31 // 0x31
+	fake_enum ms_play_music_cmd, 0x31 // 0x31
 // 0x31/0x4e hword1
 // play music
 // hword1 - music to play. if this is negative, then play the current map music
@@ -660,7 +660,7 @@
 	.endmacro
 
 // shared command
-	enum ms_sound_cmd_80380ea_cmd, 0x32 // 0x32
+	fake_enum ms_sound_cmd_80380ea_cmd, 0x32 // 0x32
 // 0x32/0x4f hword1 byte3 byte4
 // call sound_80006A2 with r0=hword1, r1=byte3, r2=byte4
 	.macro ms_sound_cmd_80380ea, hword1, byte3, byte4
@@ -671,7 +671,7 @@
 	.endmacro
 
 // shared command
-	enum ms_sound_cmd_803810e_cmd, 0x33 // 0x33
+	fake_enum ms_sound_cmd_803810e_cmd, 0x33 // 0x33
 // 0x33/0x50 byte1 byte2
 // call sound_800068A with r0=byte1, r1=byte2 then do [eGameState_BGMusicIndicator] = 0x63
 	.macro ms_sound_cmd_803810e, byte1, byte2
@@ -681,7 +681,7 @@
 	.endmacro
 
 // shared command
-	enum ms_stop_sound_cmd, 0x34 // 0x34
+	fake_enum ms_stop_sound_cmd, 0x34 // 0x34
 // 0x34/0x51
 // stop any sounds
 	.macro ms_stop_sound
@@ -689,10 +689,10 @@
 	.endmacro
 
 // shared command
-	enum ms_give_or_take_item_cmd, 0x35 // 0x35
-	subenum_start 0, 1
+	fake_enum ms_give_or_take_item_cmd, 0x35 // 0x35
+	fake_subenum_start 0, 1
 
-	subenum ms_give_item_subcmd, 0x0 // 0x0
+	fake_subenum ms_give_item_subcmd, 0x0 // 0x0
 // 0x35/0x52 0x0 byte2 byte3
 // give or take an item
 // byte1 - operation type (0=give, 1=take)
@@ -705,7 +705,7 @@
 	.byte byte3
 	.endmacro
 
-	subenum ms_take_item_subcmd, 0x1 // 0x1
+	fake_subenum ms_take_item_subcmd, 0x1 // 0x1
 // 0x35/0x52 byte1 byte2 byte3
 // give or take an item
 // byte1 - operation type (0=give, 1=take)
@@ -719,7 +719,7 @@
 	.endmacro
 
 // shared command
-	enum ms_do_pet_effect_cmd, 0x36 // 0x36
+	fake_enum ms_do_pet_effect_cmd, 0x36 // 0x36
 // 0x36/0x53 byte1 byte2
 // trigger a PET overworld effect
 // byte1 - memory param
@@ -730,10 +730,10 @@
 	.byte byte2
 	.endmacro
 
-	enum_skip 1 // 0x37
+	fake_enum_skip 1 // 0x37
 
 // shared command
-	enum ms_init_eStruct200a6a0_cmd, 0x38 // 0x38
+	fake_enum ms_init_eStruct200a6a0_cmd, 0x38 // 0x38
 // 0x38/0x58 word1 word5 word9
 // call Initialize_eStruct200a6a0 with r0=word1, r1=word5, r2=word9
 	.macro ms_init_eStruct200a6a0, word1, word5, word9
@@ -744,17 +744,17 @@
 	.endmacro
 
 // shared command
-	enum ms_run_eStruct200a6a0_callback_cmd, 0x39 // 0x39
+	fake_enum ms_run_eStruct200a6a0_callback_cmd, 0x39 // 0x39
 // 0x39/0x59
 // call run_eStruct200a6a0_Callback_8002484
 	.macro ms_run_eStruct200a6a0_callback
 	.byte ms_run_eStruct200a6a0_callback_cmd
 	.endmacro
 
-	enum ms_run_or_end_secondary_continuous_map_script_cmd, 0x3a // 0x3a
-	subenum_start 0, 1
+	fake_enum ms_run_or_end_secondary_continuous_map_script_cmd, 0x3a // 0x3a
+	fake_subenum_start 0, 1
 
-	subenum ms_run_secondary_continuous_map_script_subcmd, 0x0 // 0x0
+	fake_subenum ms_run_secondary_continuous_map_script_subcmd, 0x0 // 0x0
 // 0x3a 0x0 word2
 // set the secondary continuous map script pointer
 // word2 - map script pointer to set the secondary continuous map script pointer to
@@ -764,7 +764,7 @@
 	.word word2
 	.endmacro
 
-	subenum ms_end_secondary_continuous_map_script_subcmd, 0x1 // 0x1
+	fake_subenum ms_end_secondary_continuous_map_script_subcmd, 0x1 // 0x1
 // 0x3a 0x1
 // end execution of the secondary continuous map script pointer
 	.macro ms_run_or_end_secondary_continuous_map_script
@@ -773,7 +773,7 @@
 	.endmacro
 
 // shared command
-	enum ms_init_scenario_effect_cmd, 0x3b // 0x3b
+	fake_enum ms_init_scenario_effect_cmd, 0x3b // 0x3b
 // 0x3b/0x60 byte1
 // init scenario effect
 // byte1 - scenario effect to initialize (0=soul weapons counter, 1=mr. weather comp rainbow gauge)
@@ -783,7 +783,7 @@
 	.endmacro
 
 // shared command
-	enum ms_end_scenario_effect_cmd, 0x3c // 0x3c
+	fake_enum ms_end_scenario_effect_cmd, 0x3c // 0x3c
 // 0x3c/0x61
 // end scenario effect
 	.macro ms_end_scenario_effect
@@ -791,7 +791,7 @@
 	.endmacro
 
 // shared command
-	enum ms_init_minigame_effect_cmd, 0x3d // 0x3d
+	fake_enum ms_init_minigame_effect_cmd, 0x3d // 0x3d
 // 0x3d/0x62 byte1
 // init minigame effect
 // byte1 - minigame effect to initialize (0=AquaMan, 1=SlashMan, 2=TenguMan, 3=ElecMan, 4=EraseMan, 5=GroundMan).
@@ -801,19 +801,19 @@
 	.endmacro
 
 // shared command
-	enum ms_end_minigame_effect_cmd, 0x3e // 0x3e
+	fake_enum ms_end_minigame_effect_cmd, 0x3e // 0x3e
 // 0x3e/0x63
 // end minigame effect
 	.macro ms_end_minigame_effect
 	.byte ms_end_minigame_effect_cmd
 	.endmacro
 
-	enum_skip 1
+	fake_enum_skip 1
 
-	enum ms_spawn_or_free_objects_cmd, 0x40 // 0x40
-	subenum_start 0, 1
+	fake_enum ms_spawn_or_free_objects_cmd, 0x40 // 0x40
+	fake_subenum_start 0, 1
 
-	subenum ms_spawn_objects_subcmd, 0x0 // 0x0
+	fake_subenum ms_spawn_objects_subcmd, 0x0 // 0x0
 // 0x40 0x0 word2
 // spawn objects from list
 // word2 - list of structs corresponding to which objects to spawn and params
@@ -831,7 +831,7 @@
 	.word word2
 	.endmacro
 
-	subenum ms_free_objects_subcmd, 0x1 // 0x1
+	fake_subenum ms_free_objects_subcmd, 0x1 // 0x1
 // 0x40 0x01 byte2
 // free all objects of specified types
 // byte2 - bitfield of objects to free
@@ -843,7 +843,7 @@
 	.endmacro
 
 // shared command
-	enum ms_add_bbs_message_range_cmd, 0x41 // 0x41
+	fake_enum ms_add_bbs_message_range_cmd, 0x41 // 0x41
 // 0x41/0x67 hword1 byte3
 // add the range of bbs messages specified by hword1 and byte3
 // i.e. [hword1, hword1+byte3) (interval notation)
@@ -856,7 +856,7 @@
 	.endmacro
 
 // shared command
-	enum ms_add_mail_range_cmd, 0x42 // 0x42
+	fake_enum ms_add_mail_range_cmd, 0x42 // 0x42
 // 0x42/0x6b hword1 byte3
 // add the range of mails specified by hword1 and byte3
 // i.e. [hword1, hword1+byte3) (interval notation)
@@ -869,7 +869,7 @@
 	.endmacro
 
 // shared command
-	enum ms_cmd_8038346_cmd, 0x43 // 0x43
+	fake_enum ms_cmd_8038346_cmd, 0x43 // 0x43
 // 0x43/0x6c word1 word5
 // call sub_80356F8 with r0=word1 and r1=word5
 	.macro ms_cmd_8038346, word1, word5
@@ -879,7 +879,7 @@
 	.endmacro
 
 // shared command
-	enum ms_add_request_range_cmd, 0x44 // 0x44
+	fake_enum ms_add_request_range_cmd, 0x44 // 0x44
 // 0x44/0x78
 // add the range of bbs requests specified by hword1 and byte3
 // i.e. [hword1, hword1+byte3) (interval notation)
@@ -892,7 +892,7 @@
 	.endmacro
 
 // shared command
-	enum ms_rush_food_cmd_80384A8_cmd, 0x45 // 0x45
+	fake_enum ms_rush_food_cmd_80384A8_cmd, 0x45 // 0x45
 // 0x45/0x79 unused1to3 destination4
 // appears to be "jump_if_has_rush_food_and_a_pressed"
 // but it isn't triggered when using a piece of rush food

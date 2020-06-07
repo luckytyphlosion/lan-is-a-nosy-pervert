@@ -3,3 +3,4 @@ tools/lzss.exe
 *.gba
 *.sna
 temp/
+*.txt

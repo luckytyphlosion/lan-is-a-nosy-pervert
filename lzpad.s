@@ -8,4 +8,5 @@
 
 	.gba
 
-	create_lz "temp/7A3B84.msg"
+	create_lz "temp/ChaudConfrontsLan.msg"
+	create_lz "temp/AfterLanWins.msg"

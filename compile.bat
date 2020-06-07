@@ -9,6 +9,7 @@ tools\TextPet ^
 	Write-Text-Archives "temp\\" --format tpl
 
 tools\armips lzpad.s
-tools\lzss -ewn "temp\\7A3B84.msg.lz"
+tools\lzss -ewn "temp\\ChaudConfrontsLan.msg.lz"
+tools\lzss -ewn "temp\\AfterLanWins.msg.lz"
 tools\armips src.s -strequ ver "bn6f.s"
 if errorlevel 1 pause
