@@ -21,7 +21,7 @@ script 0 mmbn6 {
 }
 
 @archive AfterLanWins
-@size 1
+@size 2
 
 script 0 mmbn6 {
   mugshotShow
@@ -30,6 +30,19 @@ script 0 mmbn6 {
   """
   (Yes! Now I get to see
   something...)
+  """
+  keyWait
+    any = false
+  clearMsg
+  end
+}
+
+script 1 mmbn6 {
+  mugshotShow
+    mugshot = Mayl
+  msgOpen
+  """
+  Eek!
   """
   keyWait
     any = false

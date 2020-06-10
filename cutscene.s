@@ -50,8 +50,8 @@ ACDCTown_ScientistMan_ChaudConfrontsLanCutsceneNPCScript:
 
 ACDCTown_Chaud_ChaudConfrontsLanCutsceneNPCScript:
 	npc_set_active_and_visible
-	npc_disable_collision
-	npc_disable_collision_alternate
+	//npc_disable_collision
+	//npc_disable_collision_alternate
 	npc_set_sprite 4 // chaud
 	npc_set_coords 0xffff, 0x38, 0
 	npc_set_animation 3 // SPR_ANIM_NPC_CHAUD_FACE_DOWN_RIGHT
@@ -60,7 +60,7 @@ ACDCTown_Chaud_ChaudConfrontsLanCutsceneNPCScript:
 	// as the script after the battle
 	npc_wait_cutscene_var 0x8, 4
 	npc_set_animation 8 // SPR_ANIM_NPC_CHAUD_WALK_UP_RIGHT
-	npc_move_in_direction OW_UP_RIGHT, 16, 3
+	npc_move_in_direction OW_UP_RIGHT, 8, 2
 	npc_set_animation 5 // SPR_ANIM_NPC_CHAUD_FACE_DOWN_LEFT
 	npc_write_cutscene_var 0x8, 5
 	npc_jump_with_link NPCScript_StationaryNPC
@@ -81,32 +81,18 @@ ACDCTown_Lan_AfterLanWinsCutsceneNPCScript:
 	npc_set_animation 7 // SPR_ANIM_NPC_LAN_FACE_UP_LEFT
 	npc_wait_cutscene_var 0x8, 5
 	npc_pause 10
-	npc_run_secondary_script ACDCTown_CutsceneNPCScript_804dbd1
-	npc_set_animation 23
-	npc_move_in_direction 7, 16, 3
+	npc_set_animation 9 // SPR_ANIM_NPC_LAN_WALK_UP_RIGHT
+	npc_move_in_direction OW_UP_RIGHT, 16, 1
+	npc_run_secondary_script @@fadeOutAlphaCutsceneNPCScript
+	npc_set_animation 23 // SPR_ANIM_NPC_LAN_RUN_UP_LEFT
+	npc_move_in_direction OW_UP_LEFT, 16, 4
 	npc_write_cutscene_var 0x8, 6
 	npc_jump_with_link NPCScript_StationaryNPC
 
-ACDCTown_CutsceneNPCScript_804dbd1:
-	npc_pause_secondary_script 16
-	npc_set_alpha 16
-	npc_pause_secondary_script 1
-	npc_set_alpha 14
-	npc_pause_secondary_script 1
-	npc_set_alpha 12
-	npc_pause_secondary_script 1
-	npc_set_alpha 10
-	npc_pause_secondary_script 1
-	npc_set_alpha 8
-	npc_pause_secondary_script 1
-	npc_set_alpha 6
-	npc_pause_secondary_script 1
-	npc_set_alpha 4
-	npc_pause_secondary_script 1
-	npc_set_alpha 2
-	npc_pause_secondary_script 1
-	npc_set_active_and_invisible
-	npc_end_secondary_script
+@@fadeOutAlphaCutsceneNPCScript:
+	npc_pause_secondary_script 20
+	// jump to an internal script, after the internal script's pause
+	npc_jump ACDCTown_CutsceneNPCScript_804dbd1 + 2
 
 	.org 0x8081454
 ACDCTown_FixCameraCutsceneCameraScript:
@@ -178,7 +164,30 @@ ACDCTown_AfterLanWinsCutsceneScript:
 	cs_pause CS_VAR_IMM, 30
 	cs_set_var 0x8, 4
 	cs_wait_var_equal 0x8, 6
+	cs_sound_cmd_803810e 0x4, 0x1f
+	cs_set_screen_fade CS_VAR_IMM, 0x1c, 0x10
+	cs_wait_screen_fade
+	cs_pause CS_VAR_IMM, 20
+	cs_play_music SONG_PANIC
+	cs_run_text_script CS_VAR_IMM, 1
+	cs_wait_chatbox 0x80
+	cs_play_sound SOUND_EXPLOSION_C3
+	cs_pause CS_VAR_IMM, 30
+	cs_set_enter_map_screen_fade 0x8, 0x10
+	cs_warp_cmd_8038040_2 0x0, MAP_GROUP_TRANSITION_TYPE_SAME_MAP_GROUP_TYPE, ACDCTown_AfterLanWinsCutsceneWarpData
+	cs_make_ow_player_visible
+	cs_enable_ow_player_wall_collision_809e248
+	cs_unlock_player_after_non_npc_dialogue_809e122
 	cs_end_for_map_reload_maybe_8037c64
+
+ACDCTown_AfterLanWinsCutsceneWarpData:
+	.byte GROUP_ACDC_TOWN
+	.byte MAP_ACDC_TOWN
+	.byte 0 // fade to black
+	.byte OW_DOWN_RIGHT
+	.word 0xffff0000
+	.word 0x380000
+	.word 0
 
 	.org 0x87A3B84
 	.import "temp/ChaudConfrontsLan.msg.lz"
