@@ -230,6 +230,10 @@ ACDCTown_AfterLanWinsCutsceneScript:
 //	gfx_anim_data 0x80004210, 1
 //	gfx_anim_end
 
+	// override acdc town L Button Script
+	.org 0x8044610
+	.word LButtonTextScript
+
 	.align 4, 0
 ACDCTown_AfterLanWinsCutsceneWarpData:
 	.byte GROUP_ACDC_TOWN
@@ -245,6 +249,9 @@ ACDCTown_AfterLanWinsCutsceneWarpData:
 
 	.org 0x87A41C8
 	.import "temp/AfterLanWins.msg.lz"
+
+LButtonTextScript:
+	.import "temp/LButtonScript.msg.lz"
 
 	.org 0x80aeff8 // address for protoman SP flags
 	// start with max HP | recover to max HP after battle | folder is randomized | allow game over

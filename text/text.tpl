@@ -296,3 +296,20 @@ script 1 mmbn6 {
   clearMsg
   end
 }
+
+@archive LButtonScript
+@size 1
+script 0 mmbn6 {
+  mugshotShow
+    mugshot = MegaMan
+  msgOpen
+  """
+  Adapted from
+  youtu.be/5LxZ9MKxZ88
+  by timaeus22222.
+  """
+  keyWait
+    any = false
+  clearMsg
+  end
+}

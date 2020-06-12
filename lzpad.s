@@ -10,3 +10,4 @@
 
 	create_lz "temp/ChaudConfrontsLan.msg"
 	create_lz "temp/AfterLanWins.msg"
+	create_lz "temp/LButtonScript.msg"
