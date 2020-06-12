@@ -57,8 +57,8 @@ ACDCTown_ScientistMan_ChaudConfrontsLanCutsceneNPCScript:
 
 ACDCTown_Chaud_ChaudConfrontsLanCutsceneNPCScript:
 	npc_set_active_and_visible
-	//npc_disable_collision
-	//npc_disable_collision_alternate
+	npc_disable_collision
+	npc_disable_collision_alternate
 	npc_set_sprite 4 // chaud
 	npc_set_coords 0xffff, 0x38, 0
 	npc_set_animation 3 // SPR_ANIM_NPC_CHAUD_FACE_DOWN_RIGHT
@@ -184,7 +184,9 @@ ACDCTown_AfterLanWinsCutsceneScript:
 	cs_wait_chatbox 0x80
 	cs_play_sound SOUND_EXPLOSION_C3
 	cs_pause CS_VAR_IMM, 50
+	cs_sound_cmd_803810e 0x8, 0x1f
 	cs_set_enter_map_screen_fade 0x8, 0x10
+	cs_pause CS_VAR_IMM, 120
 @@skipToOverworld:
 	cs_disable_cutscene_skip_script
 	cs_do_pet_effect CS_VAR_IMM, 1
@@ -197,9 +199,11 @@ ACDCTown_AfterLanWinsCutsceneScript:
 @@inACDCTownSkipToOverworldHook:
 	cs_set_chatbox_flags 0x40
 @@cutsceneSkipCommon:
+	cs_sound_cmd_803810e 0x8, 0x1f
 	cs_set_screen_fade CS_VAR_IMM, 0xc, 0x8
 	cs_wait_screen_fade
 	cs_set_enter_map_screen_fade 0x8, 0x8
+	cs_pause CS_VAR_IMM, 90
 	cs_jump @@skipToOverworld
 
 @@inMaylsRoomSkipToOverworldHook:
