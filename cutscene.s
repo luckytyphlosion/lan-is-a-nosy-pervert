@@ -250,6 +250,7 @@ ACDCTown_AfterLanWinsCutsceneWarpData:
 	.org 0x87A41C8
 	.import "temp/AfterLanWins.msg.lz"
 
+	.align 4, 0
 LButtonTextScript:
 	.import "temp/LButtonScript.msg.lz"
 
