@@ -14,6 +14,13 @@ ACDCTown_OnInitMapScript:
 @@noCutscene:
 	ms_end
 
+//@@debug:
+//	ms_jump_if_flag_set CS_VAR_IMM, EVENT_403, @@noCutscene
+//	ms_set_event_flag CS_VAR_IMM, EVENT_403
+//	ms_set_enter_map_screen_fade 0xc, 0xff
+//	ms_start_cutscene ACDCTown_AfterLanWinsCutsceneScript, 0x0
+//	ms_end
+
 	.org 0x804d2a0
 ACDCTown_ContinuousMapScript_804d2a0:
 	ms_end
@@ -158,15 +165,19 @@ ACDCTown_AfterLanWinsCutsceneScript:
 	cs_make_ow_player_invisible
 	cs_set_screen_fade CS_VAR_IMM, 0x8, 0x8
 	cs_wait_screen_fade
+	cs_set_cutscene_skip_script @@inACDCTownSkipToOverworldHook
 	cs_pause CS_VAR_IMM, 60
 	cs_run_text_script CS_VAR_IMM, 0
 	cs_wait_chatbox 0x80
 	cs_pause CS_VAR_IMM, 30
 	cs_set_var 0x8, 4
 	cs_wait_var_equal 0x8, 6
+	cs_disable_cutscene_skip_script
 	cs_sound_cmd_803810e 0x4, 0x1f
 	cs_set_screen_fade CS_VAR_IMM, 0x1c, 0x10
 	cs_wait_screen_fade
+	cs_do_pet_effect CS_VAR_IMM, 0
+	cs_set_cutscene_skip_script @@inMaylsRoomSkipToOverworldHook
 	cs_pause CS_VAR_IMM, 20
 	cs_play_music SONG_PANIC
 	cs_run_text_script CS_VAR_IMM, 1
@@ -174,12 +185,48 @@ ACDCTown_AfterLanWinsCutsceneScript:
 	cs_play_sound SOUND_EXPLOSION_C3
 	cs_pause CS_VAR_IMM, 50
 	cs_set_enter_map_screen_fade 0x8, 0x10
+@@skipToOverworld:
+	cs_disable_cutscene_skip_script
+	cs_do_pet_effect CS_VAR_IMM, 1
 	cs_warp_cmd_8038040_2 0x0, MAP_GROUP_TRANSITION_TYPE_SAME_MAP_GROUP_TYPE, ACDCTown_AfterLanWinsCutsceneWarpData
 	cs_make_ow_player_visible
 	cs_enable_ow_player_wall_collision_809e248
 	cs_unlock_player_after_non_npc_dialogue_809e122
 	cs_end_for_map_reload_maybe_8037c64
 
+@@inACDCTownSkipToOverworldHook:
+	cs_set_chatbox_flags 0x40
+@@cutsceneSkipCommon:
+	cs_set_screen_fade CS_VAR_IMM, 0xc, 0x8
+	cs_wait_screen_fade
+	cs_set_enter_map_screen_fade 0x8, 0x8
+	cs_jump @@skipToOverworld
+
+@@inMaylsRoomSkipToOverworldHook:
+	cs_set_chatbox_flags 0x40
+	cs_load_gfx_anims 0x80348fc // ACDCTown_BGBlack_GFXAnimList
+	cs_set_screen_fade CS_VAR_IMM, 0x18, 0xff
+	cs_wait_screen_fade
+	cs_pause CS_VAR_IMM, 1
+	cs_jump @@cutsceneSkipCommon
+
+//	.align 4, 0
+//ACDCTown_BGBlack_GFXAnimList:
+//	.word @gfxAnim1
+//	.word @gfxAnim2
+//	.word 0xffffffff
+//
+//@gfxAnim1:
+//	gfx_anim_manual_pal_transform 0x8, 0x3001b60, 15, 14
+//	gfx_anim_data 0x80004210, 1
+//	gfx_anim_end
+//
+//@gfxAnim2:
+//	gfx_anim_manual_pal_transform 0x8, 0x3001750, 14, 12
+//	gfx_anim_data 0x80004210, 1
+//	gfx_anim_end
+
+	.align 4, 0
 ACDCTown_AfterLanWinsCutsceneWarpData:
 	.byte GROUP_ACDC_TOWN
 	.byte MAP_ACDC_TOWN
