@@ -78,6 +78,17 @@
 	.org 0x8002cac
 	mov r0, 0x40
 
+	// prevent jacking in at all
+	.org 0x8034d34
+	b loc_8034d44
+
+	.org 0x8034d44
+loc_8034d44:
+
+	// prevent warps
+	.org 0x80058d0
+	mov pc, lr
+
 	.include "cutscene.s"
 
 	.close

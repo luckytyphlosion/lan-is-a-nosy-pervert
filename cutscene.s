@@ -158,7 +158,7 @@ ACDCTown_AfterLanWinsCutsceneScript:
 	cs_make_ow_player_invisible
 	cs_set_screen_fade CS_VAR_IMM, 0x8, 0x8
 	cs_wait_screen_fade
-	cs_pause CS_VAR_IMM, 90
+	cs_pause CS_VAR_IMM, 60
 	cs_run_text_script CS_VAR_IMM, 0
 	cs_wait_chatbox 0x80
 	cs_pause CS_VAR_IMM, 30
@@ -172,7 +172,7 @@ ACDCTown_AfterLanWinsCutsceneScript:
 	cs_run_text_script CS_VAR_IMM, 1
 	cs_wait_chatbox 0x80
 	cs_play_sound SOUND_EXPLOSION_C3
-	cs_pause CS_VAR_IMM, 30
+	cs_pause CS_VAR_IMM, 50
 	cs_set_enter_map_screen_fade 0x8, 0x10
 	cs_warp_cmd_8038040_2 0x0, MAP_GROUP_TRANSITION_TYPE_SAME_MAP_GROUP_TYPE, ACDCTown_AfterLanWinsCutsceneWarpData
 	cs_make_ow_player_visible
